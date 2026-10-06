@@ -1,0 +1,3136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoMaceta | Plantar hoy, cuidar mañana</title>
+
+
+    <style>
+
+        /* =====================================================
+           PALETA DE COLORES
+        ===================================================== */
+
+        :root {
+
+            --verde: #5F7F38;
+            --verde-claro: #9DBB61;
+            --verde-oscuro: #30451F;
+
+            --cafe: #70452D;
+            --cafe-claro: #A66D48;
+
+            --crema: #F6EFD9;
+            --arroz: #EEE3C4;
+
+            --amarillo: #D9A62E;
+            --rosa: #B95761;
+
+            --negro: #211B17;
+            --blanco: #FFFAF0;
+
+        }
+
+
+        /* =====================================================
+           CONFIGURACIÓN GENERAL
+        ===================================================== */
+
+        * {
+
+            margin: 0;
+            padding: 0;
+
+            box-sizing: border-box;
+
+        }
+
+
+        html {
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        body {
+
+            font-family:
+                "Trebuchet MS",
+                Arial,
+                sans-serif;
+
+            color: var(--negro);
+
+
+            /*
+                AQUÍ PUEDES PONER TU FONDO DE PAPEL/ARROZ.
+
+                Guarda la imagen como:
+
+                fondo.jpg
+
+                dentro de una carpeta llamada images.
+            */
+
+            background:
+
+                linear-gradient(
+                    rgba(246,239,217,0.82),
+                    rgba(246,239,217,0.82)
+                ),
+
+                url("images/fondo.jpg");
+
+
+            background-size: cover;
+
+            background-position: center;
+
+            background-attachment: fixed;
+
+        }
+
+
+        /* =====================================================
+           ENCABEZADO
+        ===================================================== */
+
+        header {
+
+            width: 94%;
+
+            max-width: 1250px;
+
+            margin: 18px auto 0;
+
+            background: var(--cafe);
+
+            border: 5px solid var(--verde-oscuro);
+
+            border-radius: 35px;
+
+            padding: 13px 25px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 20px;
+
+            box-shadow:
+
+                0 7px 0 rgba(48,69,31,0.25);
+
+            position: sticky;
+
+            top: 12px;
+
+            z-index: 1000;
+
+        }
+
+
+        /* =====================================================
+           LOGO
+        ===================================================== */
+
+        .logo {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            min-width: 220px;
+
+        }
+
+
+        .logo-icon {
+
+            width: 70px;
+
+            height: 70px;
+
+            background: var(--crema);
+
+            border: 4px solid var(--verde-claro);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+
+        }
+
+
+        /*
+            AQUÍ SE MOSTRARÁ EL COLIBRÍ
+        */
+
+        .logo-icon img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            padding: 3px;
+
+        }
+
+
+        .logo h1 {
+
+            color: var(--blanco);
+
+            font-size: 25px;
+
+        }
+
+
+        .logo p {
+
+            color: #EAD9B4;
+
+            font-size: 12px;
+
+            margin-top: 3px;
+
+        }
+
+
+        /* =====================================================
+           MENÚ
+        ===================================================== */
+
+        nav {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            justify-content: center;
+
+            gap: 7px;
+
+        }
+
+
+        nav button {
+
+            border: none;
+
+            background: var(--crema);
+
+            color: var(--cafe);
+
+            padding: 10px 14px;
+
+            border-radius: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        nav button:hover {
+
+            background: var(--verde-claro);
+
+            color: white;
+
+            transform: translateY(-3px);
+
+        }
+
+
+        /* =====================================================
+           CONTENEDOR
+        ===================================================== */
+
+        main {
+
+            width: 94%;
+
+            max-width: 1200px;
+
+            margin: 35px auto;
+
+        }
+
+
+        .pagina {
+
+            display: none;
+
+            animation: aparecer 0.5s ease;
+
+        }
+
+
+        .pagina.activa {
+
+            display: block;
+
+        }
+
+
+        @keyframes aparecer {
+
+            from {
+
+                opacity: 0;
+
+                transform: translateY(15px);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform: translateY(0);
+
+            }
+
+        }
+
+
+        /* =====================================================
+           TARJETA PRINCIPAL
+        ===================================================== */
+
+        .contenedor {
+
+            background:
+
+                rgba(255,250,240,0.95);
+
+            border: 5px solid var(--cafe);
+
+            border-radius: 35px;
+
+            padding: 35px;
+
+            box-shadow:
+
+                0 8px 0 rgba(112,69,45,0.25),
+
+                0 15px 30px rgba(0,0,0,0.10);
+
+        }
+
+
+        .titulo {
+
+            text-align: center;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .titulo h2 {
+
+            color: var(--verde-oscuro);
+
+            font-size: 42px;
+
+        }
+
+
+        .titulo p {
+
+            color: var(--cafe);
+
+            margin-top: 8px;
+
+            font-size: 17px;
+
+        }
+
+
+        /* =====================================================
+           INICIO
+        ===================================================== */
+
+        .hero {
+
+            display: grid;
+
+            grid-template-columns:
+                1.1fr
+                0.9fr;
+
+            gap: 35px;
+
+            align-items: center;
+
+        }
+
+
+        .hero-text h2 {
+
+            font-size: 55px;
+
+            color: var(--verde-oscuro);
+
+            line-height: 1;
+
+        }
+
+
+        .hero-text h3 {
+
+            color: var(--cafe);
+
+            font-size: 24px;
+
+            margin: 15px 0;
+
+        }
+
+
+        .hero-text p {
+
+            line-height: 1.7;
+
+            font-size: 17px;
+
+        }
+
+
+        .frase {
+
+            background: var(--verde);
+
+            color: white;
+
+            padding: 18px;
+
+            border-radius: 22px;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            margin: 20px 0;
+
+            border-left:
+
+                9px solid var(--amarillo);
+
+        }
+
+
+        .boton {
+
+            display: inline-block;
+
+            border: none;
+
+            background: var(--cafe);
+
+            color: white;
+
+            padding: 13px 22px;
+
+            border-radius: 20px;
+
+            margin-top: 18px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .boton:hover {
+
+            background: var(--verde);
+
+            transform: scale(1.04);
+
+        }
+
+
+        /* =====================================================
+           ESPACIO PARA LAS 3 MASCOTAS
+        ===================================================== */
+
+        .titulo-mascotas {
+
+            text-align: center;
+
+            margin-top: 50px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .titulo-mascotas h2 {
+
+            color: var(--verde-oscuro);
+
+            font-size: 34px;
+
+        }
+
+
+        .titulo-mascotas p {
+
+            color: var(--cafe);
+
+            margin-top: 7px;
+
+        }
+
+
+        .personajes {
+
+            display: grid;
+
+            grid-template-columns:
+
+                repeat(3, 1fr);
+
+            gap: 30px;
+
+            margin-top: 30px;
+
+            padding: 10px;
+
+        }
+
+
+        /*
+            TARJETAS GRANDES PARA LAS MASCOTAS
+        */
+
+        .personaje {
+
+            background: var(--arroz);
+
+            border:
+
+                4px solid var(--cafe);
+
+            border-radius: 30px;
+
+            padding: 22px;
+
+            text-align: center;
+
+            min-height: 500px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            justify-content: space-between;
+
+            transition: 0.3s;
+
+            box-shadow:
+
+                0 7px 0 rgba(112,69,45,0.20);
+
+        }
+
+
+        .personaje:hover {
+
+            transform:
+
+                translateY(-8px)
+                rotate(-1deg);
+
+            border-color: var(--verde);
+
+            box-shadow:
+
+                0 12px 0 rgba(95,127,56,0.25);
+
+        }
+
+
+        /*
+            ESPACIO GRANDE PARA CADA DIBUJO
+        */
+
+        .personaje img {
+
+            width: 100%;
+
+            height: 370px;
+
+            object-fit: contain;
+
+            border-radius: 22px;
+
+            background:
+
+                rgba(255,250,240,0.85);
+
+            border:
+
+                3px dashed var(--verde-claro);
+
+            padding: 12px;
+
+            transition: 0.3s;
+
+        }
+
+
+        .personaje:hover img {
+
+            transform: scale(1.03);
+
+        }
+
+
+        .personaje h3 {
+
+            margin-top: 15px;
+
+            color: var(--cafe);
+
+            font-size: 25px;
+
+        }
+
+
+        .personaje p {
+
+            margin-top: 7px;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+
+        }
+
+
+        /* =====================================================
+           TARJETAS DE INFORMACIÓN
+        ===================================================== */
+
+        .tarjetas {
+
+            display: grid;
+
+            grid-template-columns:
+
+                repeat(2,1fr);
+
+            gap: 20px;
+
+        }
+
+
+        .tarjeta {
+
+            background: var(--arroz);
+
+            border:
+
+                3px solid var(--verde);
+
+            border-radius: 22px;
+
+            padding: 22px;
+
+        }
+
+
+        .tarjeta h3 {
+
+            color: var(--cafe);
+
+            margin-bottom: 10px;
+
+            font-size: 22px;
+
+        }
+
+
+        .tarjeta p {
+
+            line-height: 1.6;
+
+        }
+
+
+        .tarjeta ul {
+
+            padding-left: 20px;
+
+            line-height: 1.7;
+
+        }
+
+
+        /* =====================================================
+           PALETA
+        ===================================================== */
+
+        .colores {
+
+            display: flex;
+
+            gap: 15px;
+
+            flex-wrap: wrap;
+
+            margin-top: 15px;
+
+        }
+
+
+        .color {
+
+            width: 120px;
+
+            height: 85px;
+
+            border-radius: 18px;
+
+            display: flex;
+
+            align-items: end;
+
+            justify-content: center;
+
+            padding: 8px;
+
+            color: white;
+
+            font-weight: bold;
+
+            border:
+
+                3px solid var(--blanco);
+
+            box-shadow:
+
+                0 3px 8px rgba(0,0,0,0.15);
+
+        }
+
+
+        .verde {
+
+            background: #5F7F38;
+
+        }
+
+
+        .verde2 {
+
+            background: #9DBB61;
+
+        }
+
+
+        .cafe {
+
+            background: #70452D;
+
+        }
+
+
+        .amarillo {
+
+            background: #D9A62E;
+
+        }
+
+
+        .rosa {
+
+            background: #B95761;
+
+        }
+
+
+        /* =====================================================
+           CÓDIGO
+        ===================================================== */
+
+        .codigo {
+
+            background: #211B17;
+
+            color: #E9DBA9;
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            margin-top: 20px;
+
+            overflow-x: auto;
+
+            font-family:
+
+                Consolas,
+                monospace;
+
+        }
+
+
+        .comparacion {
+
+            display: grid;
+
+            grid-template-columns:
+
+                1fr 1fr;
+
+            gap: 20px;
+
+            margin-top: 20px;
+
+        }
+
+
+        .ejemplo {
+
+            padding: 20px;
+
+            border-radius: 20px;
+
+            background: var(--arroz);
+
+            border:
+
+                3px solid var(--verde);
+
+        }
+
+
+        /* =====================================================
+           DATO DE LA LIBÉLULA
+        ===================================================== */
+
+        .dato {
+
+            display: flex;
+
+            gap: 18px;
+
+            align-items: center;
+
+            background: #E6EFD0;
+
+            border:
+
+                4px solid var(--verde);
+
+            border-radius: 25px;
+
+            padding: 20px;
+
+            margin-top: 25px;
+
+        }
+
+
+        .dato .mini {
+
+            width: 90px;
+
+            height: 90px;
+
+            border-radius: 50%;
+
+            background: var(--blanco);
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            flex-shrink: 0;
+
+        }
+
+
+        .dato .mini img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+        }
+
+
+        /* =====================================================
+           CUESTIONARIO
+        ===================================================== */
+
+        .dialogo {
+
+            display: flex;
+
+            gap: 15px;
+
+            align-items: flex-start;
+
+            margin: 25px 0;
+
+        }
+
+
+        .avatar {
+
+            width: 80px;
+
+            height: 80px;
+
+            flex-shrink: 0;
+
+            background: var(--crema);
+
+            border:
+
+                4px solid var(--cafe);
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            overflow: hidden;
+
+        }
+
+
+        .avatar img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+        }
+
+
+        .burbuja {
+
+            background: var(--arroz);
+
+            border:
+
+                3px solid var(--cafe);
+
+            padding: 18px 20px;
+
+            border-radius: 20px;
+
+            width: 100%;
+
+        }
+
+
+        .burbuja strong {
+
+            color: var(--cafe);
+
+            font-size: 18px;
+
+        }
+
+
+        .burbuja p {
+
+            margin-top: 7px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .opciones {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin-top: 15px;
+
+        }
+
+
+        .opciones button {
+
+            text-align: left;
+
+            padding: 12px;
+
+            border:
+
+                2px solid var(--verde);
+
+            border-radius: 13px;
+
+            background: var(--blanco);
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .opciones button:hover {
+
+            background: var(--verde-claro);
+
+            color: white;
+
+        }
+
+
+        .resultado {
+
+            margin-top: 12px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =====================================================
+           FOOTER
+        ===================================================== */
+
+        footer {
+
+            text-align: center;
+
+            margin: 30px auto;
+
+            width: 94%;
+
+            max-width: 1200px;
+
+            background: var(--cafe);
+
+            color: var(--blanco);
+
+            padding: 18px;
+
+            border-radius: 25px;
+
+            border:
+
+                4px solid var(--verde-oscuro);
+
+        }
+
+
+        /* =====================================================
+           RESPONSIVE
+        ===================================================== */
+
+        @media(max-width: 900px) {
+
+            header {
+
+                flex-direction: column;
+
+            }
+
+
+            .hero {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .personajes {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .personaje {
+
+                min-height: 500px;
+
+            }
+
+
+            .personaje img {
+
+                height: 380px;
+
+            }
+
+
+            .tarjetas {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .comparacion {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+
+        @media(max-width: 600px) {
+
+            .contenedor {
+
+                padding: 20px;
+
+            }
+
+
+            .hero-text h2 {
+
+                font-size: 42px;
+
+            }
+
+
+            .titulo h2 {
+
+                font-size: 32px;
+
+            }
+
+
+            nav button {
+
+                font-size: 12px;
+
+                padding: 8px 10px;
+
+            }
+
+
+            .personaje img {
+
+                height: 320px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     ENCABEZADO
+===================================================== -->
+
+<header>
+
+
+    <div class="logo">
+
+
+        <!--
+            EL COLIBRÍ SERÁ EL LOGO.
+
+            Guarda tu dibujo como:
+
+            images/colibri.png
+        -->
+
+        <div class="logo-icon">
+
+            <img
+                src="imagenes/sssssss.jpg"
+                alt="Colibrí de EcoMaceta"
+            >
+
+        </div>
+
+
+        <div>
+
+            <h1>EcoMaceta</h1>
+
+            <p>
+                Que crescan tus plantas, la contaminación NO
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =================================================
+         MENÚ
+    ================================================= -->
+
+    <nav>
+
+        <button
+            onclick="mostrarPagina('inicio')">
+
+            Inicio
+
+        </button>
+
+
+        <button
+            onclick="mostrarPagina('producto')">
+
+            Producto
+
+        </button>
+
+
+        <button
+            onclick="mostrarPagina('javascript')">
+
+            JavaScript
+
+        </button>
+
+
+        <button
+            onclick="mostrarPagina('jquery')">
+
+            jQuery
+
+        </button>
+
+
+        <button
+            onclick="mostrarPagina('json')">
+
+            JSON
+
+        </button>
+
+
+        <button
+            onclick="mostrarPagina('hosting')">
+
+            Hosting
+
+        </button>
+
+
+        <button
+            onclick="mostrarPagina('cuestionario')">
+
+            Cuestionario
+
+        </button>
+
+    </nav>
+
+
+</header>
+
+
+
+<!-- =====================================================
+     CONTENIDO
+===================================================== -->
+
+<main>
+
+
+<!-- =====================================================
+     PÁGINA INICIO
+===================================================== -->
+
+<section
+    id="inicio"
+    class="pagina activa">
+
+
+    <div class="contenedor">
+
+
+        <div class="hero">
+
+
+            <div class="hero-text">
+
+
+                <h2>
+                    EcoMaceta
+                </h2>
+
+
+                <h3>
+                    "Que crescan tus plantas, la contaminación NO"
+                </h3>
+
+
+                <div class="frase">
+
+                    “Tienes la opción pero cual será t decisión.”
+
+                </div>
+
+
+                <p>
+
+                    EcoMaceta es una maceta ecológica
+                    creada para personas que aman las
+                    plantas y quieren reducir el impacto
+                    que generan los productos cuando
+                    dejan de utilizarse.
+
+                </p>
+
+
+                <p style="margin-top:12px;">
+
+                    Nuestra idea es crear productos
+                    bonitos, útiles y pensados para que
+                    al terminar su vida útil puedan
+                    reutilizarse o regresar al ambiente
+                    de una manera más responsable.
+
+                </p>
+
+
+                <button
+                    class="boton"
+                    onclick="mostrarPagina('producto')">
+
+                    Conocer EcoMaceta →
+
+                </button>
+
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+
+                <h3>
+                    🌿 Nuestra idea
+                </h3>
+
+
+                <p>
+
+                    Crear productos para plantas que
+                    combinen creatividad, funcionalidad
+                    y conciencia ambiental.
+
+                </p>
+
+
+                <br>
+
+
+                <p>
+
+                    <strong>
+                        Propuesta de valor:
+                    </strong>
+
+                    cuidar nuestras plantas mientras
+                    buscamos cuidar también el ambiente.
+
+                </p>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             MASCOTAS
+        ================================================= -->
+
+        <div class="titulo-mascotas">
+
+
+            <h2>
+                ✨ Conoce a nuestros increibles amigos >:D
+            </h2>
+
+
+            <p>
+                Amigos que te van ayudar en cuaquier duda que tengas ellos te van ayudar y al planeta.
+            </p>
+
+
+        </div>
+
+
+
+        <div class="personajes">
+
+
+            <!-- =================================================
+                 LIBÉLULA
+            ================================================= -->
+
+            <div class="personaje">
+
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Libélula de EcoMaceta"
+                >
+
+
+                <div>
+
+                    <h3>
+                        🪶 Lila
+                    </h3>
+
+
+                    <p>
+
+                        La libélula curiosa que comparte
+                        datos interesantes sobre tecnología,
+                        naturaleza y el ambiente.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 COLIBRÍ
+            ================================================= -->
+
+            <div class="personaje">
+
+
+                <img
+                    src="imagenes/sssssss.jpg"
+                    alt="Colibrí de EcoMaceta"
+                >
+
+
+                <div>
+
+                    <h3>
+                        🌸 Kiro
+                    </h3>
+                    
+                    <p>
+
+                        El colibrí explorador que representa
+                        la creatividad, la vida y el movimiento.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 MACETA
+            ================================================= -->
+
+            <div class="personaje">
+
+
+                <img
+                    src="imagenes/uuuuuuuuu.jpg"
+                    alt="Maceta de EcoMaceta"
+                >
+
+
+                <div>
+
+                    <h3>
+                        🌵 Maki
+                    </h3>
+
+
+                    <p>
+
+                        La maceta que demuestra que decorar
+                        nuestro espacio también puede hacerse
+                        pensando en el planeta.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     PÁGINA PRODUCTO
+===================================================== -->
+
+<section
+    id="producto"
+    class="pagina">
+
+
+    <div class="contenedor">
+
+
+        <div class="titulo">
+
+            <h2>
+                🌱 Nuestro producto
+            </h2>
+
+            <p>
+                Una maceta que para las personas que quiere ayudar a plantar tambien no contaminen ayudando a nuestra querida madre naturaleza 
+            </p>
+
+        </div>
+
+
+
+        <div class="tarjetas">
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    ¿Qué es EcoMaceta?
+                </h3>
+
+                <p>
+
+                    EcoMaceta es una maceta diseñada
+                    para cultivar diferentes tipos de
+                    plantas.
+
+                    Su característica principal es
+                    buscar una alternativa más
+                    responsable para cuando el producto
+                    ya no se utilice.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    🎯 Público objetivo
+                </h3>
+
+                <p>
+
+                    Personas que tienen plantas en casa,
+                    estudiantes, jóvenes, familias y
+                    cualquier persona interesada en
+                    decorar sus espacios de una manera
+                    más amigable con el ambiente.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    💡 Propuesta de valor
+                </h3>
+
+                <p>
+
+                    Una maceta atractiva, funcional y
+                    pensada desde el principio para
+                    disminuir residuos y fomentar el
+                    cuidado de las plantas.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    💰 Precio
+                </h3>
+
+                <p>
+
+                    El precio dependería del tamaño y
+                    los materiales utilizados.
+
+                    La idea es mantener un precio
+                    accesible para estudiantes y
+                    familias.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    🛒 Forma de venta
+                </h3>
+
+                <p>
+
+                    Se puede vender mediante redes
+                    sociales, pedidos directos y
+                    nuestra página web.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    📱 Publicidad
+                </h3>
+
+                <p>
+
+                    Se pueden utilizar Instagram,
+                    TikTok y Facebook para mostrar
+                    nuestros diseños, plantas,
+                    personajes y consejos.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    🚀 Lanzamiento
+                </h3>
+
+                <p>
+
+                    Para el lanzamiento se pueden
+                    publicar imágenes del producto,
+                    presentar a las mascotas y crear
+                    una promoción para los primeros
+                    compradores.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    💚 Servicio postventa
+                </h3>
+
+                <p>
+
+                    Brindar recomendaciones para cuidar
+                    la maceta, resolver dudas y recibir
+                    comentarios de los clientes.
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             PALETA
+        ================================================= -->
+
+        <div
+            class="tarjeta"
+            style="margin-top:25px;">
+
+
+            <h3>
+                🎨 Identidad y paleta de colores
+            </h3>
+
+
+            <p>
+
+                Los colores mezclan tonos naturales
+                con colores cálidos para que la marca
+                se vea ecológica, creativa y diferente.
+
+            </p>
+
+
+            <div class="colores">
+
+
+                <div class="color verde">
+
+                    #5F7F38
+
+                </div>
+
+
+                <div class="color verde2">
+
+                    #9DBB61
+
+                </div>
+
+
+                <div class="color cafe">
+
+                    #70452D
+
+                </div>
+
+
+                <div class="color amarillo">
+
+                    #D9A62E
+
+                </div>
+
+
+                <div class="color rosa">
+
+                    #B95761
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<section
+    id="javascript"
+    class="pagina">
+
+
+    <div class="contenedor">
+
+
+        <div class="titulo">
+
+            <h2>
+                💻 JavaScript
+            </h2>
+
+            <p>
+                El comportamiento de una página web.
+            </p>
+
+        </div>
+
+
+        <div class="tarjeta">
+
+            <h3>
+                ¿Qué es JavaScript?
+            </h3>
+
+            <p>
+
+                JavaScript es un lenguaje de programación
+                utilizado para agregar interactividad y
+                comportamiento a las páginas web.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                HTML crea la estructura,
+                CSS se encarga del diseño y
+                JavaScript permite que la página
+                reaccione a las acciones del usuario.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="comparacion">
+
+
+            <div class="ejemplo">
+
+                <h3>
+                    HTML
+                </h3>
+
+                <p>
+                    Crea la estructura de la página.
+                </p>
+
+            </div>
+
+
+            <div class="ejemplo">
+
+                <h3>
+                    CSS
+                </h3>
+
+                <p>
+                    Controla colores, tamaños y diseño.
+                </p>
+
+            </div>
+
+
+            <div class="ejemplo">
+
+                <h3>
+                    JavaScript
+                </h3>
+
+                <p>
+                    Agrega acciones e interactividad.
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="codigo">
+
+<pre>
+let producto = "EcoMaceta";
+
+function saludar() {
+
+    alert("¡Bienvenido a EcoMaceta!");
+
+}
+
+document
+    .querySelector("#saludo")
+    .addEventListener("click", saludar);
+</pre>
+
+        </div>
+
+
+
+        <button
+            id="saludo"
+            class="boton">
+
+            Probar JavaScript
+
+        </button>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     JQUERY
+===================================================== -->
+
+<section
+    id="jquery"
+    class="pagina">
+
+
+    <div class="contenedor">
+
+
+        <div class="titulo">
+
+            <h2>
+                ✨ jQuery
+            </h2>
+
+            <p>
+                Una librería que facilita el uso de JavaScript.
+            </p>
+
+        </div>
+
+
+
+        <div class="tarjeta">
+
+            <h3>
+                ¿Qué es jQuery?
+            </h3>
+
+            <p>
+
+                jQuery es una librería de JavaScript
+                que nació para hacer más sencilla
+                la manipulación de elementos,
+                eventos, animaciones y efectos
+                en páginas web.
+
+            </p>
+
+
+            <br>
+
+
+            <p>
+
+                Una de sus características más
+                conocidas es el uso del símbolo
+                <strong>$</strong> para seleccionar
+                elementos.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="codigo">
+
+<pre>
+$("#mensaje").fadeIn();
+
+$("#menu").slideToggle();
+</pre>
+
+        </div>
+
+
+
+        <div
+            class="tarjeta"
+            style="margin-top:20px;">
+
+
+            <h3>
+                Ventajas
+            </h3>
+
+
+            <ul>
+
+                <li>
+                    Sintaxis sencilla.
+                </li>
+
+                <li>
+                    Facilita algunas animaciones.
+                </li>
+
+                <li>
+                    Fue muy útil para compatibilidad
+                    entre navegadores.
+                </li>
+
+            </ul>
+
+
+            <br>
+
+
+            <h3>
+                Desventajas
+            </h3>
+
+
+            <ul>
+
+                <li>
+                    JavaScript moderno puede hacer
+                    muchas de estas tareas sin jQuery.
+                </li>
+
+                <li>
+                    Puede ser innecesario en proyectos
+                    pequeños.
+                </li>
+
+            </ul>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     JSON
+===================================================== -->
+
+<section
+    id="json"
+    class="pagina">
+
+
+    <div class="contenedor">
+
+
+        <div class="titulo">
+
+            <h2>
+                📦 JSON
+            </h2>
+
+            <p>
+                Datos organizados para que las aplicaciones puedan comunicarse.
+            </p>
+
+        </div>
+
+
+
+        <div class="tarjeta">
+
+            <h3>
+                ¿Qué significa JSON?
+            </h3>
+
+            <p>
+
+                JSON significa JavaScript Object
+                Notation.
+
+                Es un formato utilizado para organizar
+                y transmitir información entre
+                aplicaciones y servidores.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="comparacion">
+
+
+            <div class="ejemplo">
+
+                <h3>
+                    Objeto JavaScript
+                </h3>
+
+
+                <div class="codigo">
+
+<pre>
+const planta = {
+
+    nombre: "Cactus",
+
+    color: "verde",
+
+    precio: 8
+
+};
+</pre>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="ejemplo">
+
+                <h3>
+                    JSON
+                </h3>
+
+
+                <div class="codigo">
+
+<pre>
+{
+
+    "nombre": "Cactus",
+
+    "color": "verde",
+
+    "precio": 8
+
+}
+</pre>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================================
+             DATO DE LA LIBÉLULA
+        ================================================= -->
+
+        <div class="dato">
+
+
+            <div class="mini">
+
+                <img
+                    src="imagenes/uuuuuuuuu.jpg"
+                    alt="Libélula">
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Lila dice:
+                </strong>
+
+
+                <p>
+
+                    “¡Dato curioso! JSON permite que
+                    una página web pueda recibir
+                    información organizada desde
+                    un servidor o una API apoco no esta chido??!!”
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     HOSTING Y DOMINIOS
+===================================================== -->
+
+<section
+    id="hosting"
+    class="pagina">
+
+
+    <div class="contenedor">
+
+
+        <div class="titulo">
+
+            <h2>
+                🌐 Web Hosting y Dominios
+            </h2>
+
+            <p>
+                ¿Cómo llega una página web a Internet?
+            </p>
+
+        </div>
+
+
+
+        <div class="tarjetas">
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    ☁️ Web Hosting
+                </h3>
+
+                <p>
+
+                    Es el servicio que permite guardar
+                    los archivos de una página web
+                    en un servidor para que otras
+                    personas puedan acceder a ella
+                    mediante Internet.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    📌 Tipos de Hosting
+                </h3>
+
+                <ul>
+
+                    <li>
+                        Hosting compartido.
+                    </li>
+
+                    <li>
+                        VPS.
+                    </li>
+
+                    <li>
+                        Hosting en la nube.
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    ▲ Vercel
+                </h3>
+
+                <p>
+
+                    Vercel permite desplegar proyectos
+                    web conectando un repositorio de
+                    código para que pueda estar
+                    disponible públicamente en Internet.
+
+                </p>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    🔗 Dominio
+                </h3>
+
+                <p>
+
+                    Un dominio es el nombre que
+                    utilizamos para encontrar una
+                    página web.
+
+                </p>
+
+
+                <br>
+
+
+                <strong>
+                    ecomaceta.com
+                </strong>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    🌎 TLD
+                </h3>
+
+                <p>
+
+                    Es la parte final de un dominio.
+
+                </p>
+
+
+                <br>
+
+
+                <strong>
+                    .com &nbsp; .net &nbsp; .org
+                </strong>
+
+            </div>
+
+
+
+            <div class="tarjeta">
+
+                <h3>
+                    📂 Subdominio
+                </h3>
+
+                <p>
+
+                    Es una sección adicional
+                    de un dominio.
+
+                </p>
+
+
+                <br>
+
+
+                <strong>
+                    blog.ecomaceta.com
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+
+        <div
+            class="tarjeta"
+            style="margin-top:25px;">
+
+
+            <h3>
+                🔄 Propagación DNS
+            </h3>
+
+
+            <p>
+
+                Cuando se conecta un dominio con
+                un sitio web, los cambios de DNS
+                pueden tardar un tiempo en actualizarse
+                y llegar a diferentes servidores.
+
+            </p>
+
+
+            <div class="frase">
+
+                Dominio
+                →
+                DNS
+                →
+                Servidor
+                →
+                Página web
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+
+<!-- =====================================================
+     CUESTIONARIO
+===================================================== -->
+
+<section
+    id="cuestionario"
+    class="pagina">
+
+
+    <div class="contenedor">
+
+
+        <div class="titulo">
+
+            <h2>
+                🧠 Cuestionario Web
+            </h2>
+
+            <p>
+
+                ¡Ayuda a nuestras mascotas a
+                comprobar cuánto aprendiste!
+
+            </p>
+
+        </div>
+
+
+
+        <!-- PREGUNTA 1 -->
+
+        <div class="dialogo">
+
+
+            <div class="avatar">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Lila">
+
+            </div>
+
+
+            <div class="burbuja">
+
+
+                <strong>
+                    Lila, la libélula:
+                </strong>
+
+
+                <p>
+
+                    ¿Qué tecnología se utiliza
+                    principalmente para agregar
+                    comportamiento e interactividad
+                    a una página web?
+
+                </p>
+
+
+
+                <div class="opciones">
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        A) HTML
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        B) CSS
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,true)">
+
+                        C) JavaScript
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        D) JSON
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="resultado"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PREGUNTA 2 -->
+
+        <div class="dialogo">
+
+
+            <div class="avatar">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Kiro">
+
+            </div>
+
+
+            <div class="burbuja">
+
+
+                <strong>
+                    Kiro, el colibrí:
+                </strong>
+
+
+                <p>
+
+                    ¿Para qué sirve principalmente JSON?
+
+                </p>
+
+
+
+                <div class="opciones">
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        A) Para cambiar colores
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,true)">
+
+                        B) Para organizar e intercambiar datos
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        C) Para crear dominios
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        D) Para editar imágenes
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="resultado"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PREGUNTA 3 -->
+
+        <div class="dialogo">
+
+
+            <div class="avatar">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Maki">
+
+            </div>
+
+
+            <div class="burbuja">
+
+
+                <strong>
+                    Maki, la maceta:
+                </strong>
+
+
+                <p>
+                    ¿Qué es un dominio?
+                </p>
+
+
+
+                <div class="opciones">
+
+
+                    <button
+                        onclick="respuesta(this,true)">
+
+                        A) El nombre utilizado para encontrar un sitio web
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        B) Un lenguaje de programación
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        C) Un tipo de planta
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        D) Una imagen para una página
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="resultado"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PREGUNTA 4 -->
+
+        <div class="dialogo">
+
+
+            <div class="avatar">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Lila">
+
+            </div>
+
+
+            <div class="burbuja">
+
+
+                <strong>
+                    Lila:
+                </strong>
+
+
+                <p>
+
+                    ¿Qué hace principalmente un
+                    servicio de Web Hosting?
+
+                </p>
+
+
+
+                <div class="opciones">
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        A) Crea dibujos
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        B) Cambia el nombre de una planta
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,true)">
+
+                        C) Guarda los archivos del sitio para que pueda ser accesible
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        D) Crea preguntas
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="resultado"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PREGUNTA 5 -->
+
+        <div class="dialogo">
+
+
+            <div class="avatar">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Kiro">
+
+            </div>
+
+
+            <div class="burbuja">
+
+
+                <strong>
+                    Kiro:
+                </strong>
+
+
+                <p>
+
+                    ¿Cuál de estos es un ejemplo
+                    de TLD?
+
+                </p>
+
+
+
+                <div class="opciones">
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        A) www
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,true)">
+
+                        B) .com
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        C) https
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        D) HTML
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="resultado"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- PREGUNTA 6 -->
+
+        <div class="dialogo">
+
+
+            <div class="avatar">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Maki">
+
+            </div>
+
+
+            <div class="burbuja">
+
+
+                <strong>
+                    Maki:
+                </strong>
+
+
+                <p>
+
+                    ¿Qué tecnología se caracteriza
+                    por utilizar el símbolo "$"
+                    para seleccionar elementos?
+
+                </p>
+
+
+
+                <div class="opciones">
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        A) JSON
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        B) HTML
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,true)">
+
+                        C) jQuery
+
+                    </button>
+
+
+                    <button
+                        onclick="respuesta(this,false)">
+
+                        D) DNS
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="resultado"></div>
+
+
+            </div>
+
+
+        </div>
+
+
+
+        <div class="dato">
+
+
+            <div class="mini">
+
+                <img
+                    src="imagenes/ooo.jpg"
+                    alt="Libélula">
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Lila dice:
+                </strong>
+
+
+                <p>
+
+                    " aver si tas buso ”
+
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</section>
+
+
+</main>
+
+
+
+<!-- =====================================================
+     PIE DE PÁGINA
+===================================================== -->
+
+<footer>
+
+    🌱 EcoMaceta — Plantar hoy, cuidar mañana 🌱
+
+    <br>
+
+    Proyecto educativo de desarrollo web
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
+<script>
+
+
+    /* =====================================================
+       CAMBIAR ENTRE PÁGINAS
+    ===================================================== */
+
+    function mostrarPagina(id) {
+
+
+        const paginas =
+            document.querySelectorAll(".pagina");
+
+
+        paginas.forEach(function(pagina) {
+
+            pagina.classList.remove("activa");
+
+        });
+
+
+        const paginaSeleccionada =
+            document.getElementById(id);
+
+
+        paginaSeleccionada
+            .classList
+            .add("activa");
+
+
+        window.scrollTo({
+
+            top: 0,
+
+            behavior: "smooth"
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       RESPUESTAS DEL CUESTIONARIO
+    ===================================================== */
+
+    function respuesta(boton, correcta) {
+
+
+        const contenedor =
+            boton.parentElement;
+
+
+        const resultado =
+            contenedor.nextElementSibling;
+
+
+        const botones =
+            contenedor.querySelectorAll("button");
+
+
+        botones.forEach(function(boton) {
+
+            boton.disabled = true;
+
+        });
+
+
+        if (correcta) {
+
+
+            resultado.textContent =
+                "✓ ¡Correcto! la mera verdura 🌱";
+
+
+            resultado.style.color =
+                "#5F7F38";
+
+
+        } else {
+
+
+            resultado.textContent =
+                "✗ No es correcto.Mejor nadota ";
+
+
+            resultado.style.color =
+                "#B95761";
+
+        }
+
+    }
+
+
+
+    /* =====================================================
+       EVENTO DE JAVASCRIPT
+    ===================================================== */
+
+    const botonSaludo =
+        document.querySelector("#saludo");
+
+
+    if (botonSaludo) {
+
+
+        botonSaludo.addEventListener(
+            "click",
+
+            function() {
+
+
+                alert(
+
+                    "🌱 ¡Bienvenido a EcoMaceta! " +
+
+                    "Gracias por considerar al medio ambiente " +
+
+                    "y aprender sobre desarrollo web."
+
+                );
+
+            }
+
+        );
+
+    }
+
+
+</script>
+
+
+</body>
+
+</html>
