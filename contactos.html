@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoMaceta - Contacto</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        :root {
+            --verde: #5F7F38;
+            --verde-claro: #9DBB61;
+            --verde-oscuro: #30451F;
+            --cafe: #70452D;
+            --cafe-claro: #A66D48;
+            --crema: #F6EFD9;
+            --arroz: #EEE3C4;
+            --amarillo: #D9A62E;
+            --rosa: #B95761;
+            --negro: #211B17;
+            --blanco: #FFFAF0;
+        }
+
+        body {
+            background-color: var(--arroz);
+            color: var(--negro);
+        }
+
+        .color-verde {
+            color: var(--verde);
+        }
+
+        .color-cafe {
+            color: var(--cafe);
+        }
+
+        .bg-eco {
+            background-color: var(--verde);
+        }
+
+        .bg-eco-oscuro {
+            background-color: var(--verde-oscuro);
+        }
+
+        .bg-crema {
+            background-color: var(--crema);
+        }
+
+        .btn-eco {
+            background-color: var(--verde);
+            color: var(--blanco);
+            border: none;
+        }
+
+        .btn-eco:hover {
+            background-color: var(--verde-oscuro);
+            color: var(--blanco);
+        }
+
+        .titulo-eco {
+            color: var(--verde-oscuro);
+            font-weight: bold;
+        }
+
+        .boton-musica {
+            position: fixed;
+            right: 25px;
+            bottom: 25px;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            border: none;
+            background-color: var(--verde);
+            color: var(--blanco);
+            box-shadow: 0 4px 12px rgba(0,0,0,.25);
+            z-index: 9999;
+            transition: .3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .boton-musica:hover {
+            background-color: var(--verde-oscuro);
+            transform: scale(1.08);
+        }
+
+        .boton-musica::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            right: 70px;
+            white-space: nowrap;
+            background-color: var(--negro);
+            color: var(--blanco);
+            padding: 7px 12px;
+            border-radius: 6px;
+            font-size: 14px;
+            opacity: 0;
+            visibility: hidden;
+            transition: .2s;
+            pointer-events: none;
+        }
+
+        .boton-musica:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg bg-eco navbar-dark shadow">
+    <div class="container">
+        <a class="navbar-brand fw-bold" href="#">🌱 EcoMaceta</a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="menu">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Inicio</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="contactos.html">Contacto</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card shadow border-0 bg-crema">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <h1 class="titulo-eco">🌱 Contacta con EcoMaceta</h1>
+                        <p class="text-secondary">
+                            ¿Tienes alguna pregunta o comentario?
+                            Escríbenos y nos pondremos en contacto contigo.
+                        </p>
+                    </div>
+
+                    <form id="formularioContacto">
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label fw-bold">Nombre</label>
+                            <input type="text" class="form-control" id="nombre" placeholder="Escribe tu nombre" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="correo" class="form-label fw-bold">Correo electrónico</label>
+                            <input type="email" class="form-control" id="correo" placeholder="ejemplo@correo.com" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="mensaje" class="form-label fw-bold">Mensaje</label>
+                            <textarea class="form-control" id="mensaje" rows="5" placeholder="Escribe tu mensaje..." required></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" id="btnEnviar" class="btn btn-eco btn-lg">
+                                <i class="bi bi-send"></i>
+                                Enviar mensaje
+                            </button>
+                        </div>
+                    </form>
+
+                    <div id="resultado" class="mt-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="col-lg-8">
+            <div class="card shadow border-0 bg-crema">
+                <div class="card-body p-4 text-center">
+                    <h3 class="titulo-eco mb-3">🎵 Música de EcoMaceta</h3>
+                    <p id="nombreCancion" class="color-cafe fw-bold mb-0">
+                        Preparando música...
+                    </p>
+                    <audio id="reproductor"></audio>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-eco-oscuro text-white text-center py-4">
+    <p class="mb-0">🌱 EcoMaceta © 2026</p>
+    <small>Cuidando las plantas y el medio ambiente.</small>
+</footer>
+
+<button id="btnMusica" class="boton-musica" type="button" data-tooltip="Detener" aria-label="Detener música">
+    <i class="bi bi-stop-fill"></i>
+</button>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    const LINK_DISCORD = "PEGA_AQUI_TU_WEBHOOK_DE_DISCORD";
+
+    $("#formularioContacto").on("submit", function(event) {
+        event.preventDefault();
+
+        const nombre = $("#nombre").val().trim();
+        const correo = $("#correo").val().trim();
+        const mensaje = $("#mensaje").val().trim();
+
+        if (!nombre || !correo || !mensaje) {
+            $("#resultado").html(`
+                <div class="alert alert-warning">
+                    ⚠️ Completa todos los campos.
+                </div>
+            `);
+            return;
+        }
+
+        $("#btnEnviar").prop("disabled", true).html(`
+            <span class="spinner-border spinner-border-sm"></span>
+            Enviando...
+        `);
+
+        const datosDiscord = {
+            username: "EcoMaceta",
+            embeds: [{
+                title: "🌱 Nuevo mensaje de EcoMaceta",
+                color: 6268728,
+                fields: [
+                    {
+                        name: "👤 Nombre",
+                        value: nombre,
+                        inline: true
+                    },
+                    {
+                        name: "📧 Correo",
+                        value: correo,
+                        inline: true
+                    },
+                    {
+                        name: "💬 Mensaje",
+                        value: mensaje
+                    }
+                ],
+                footer: {
+                    text: "Formulario de contacto EcoMaceta"
+                },
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        $.ajax({
+            url: LINK_DISCORD,
+            type: "POST",
+            contentType: "application/json",
+            data: JSON.stringify(datosDiscord),
+            success: function() {
+                $("#resultado").html(`
+                    <div class="alert alert-success">
+                        ✅ ¡Mensaje enviado correctamente!
+                    </div>
+                `);
+
+                $("#formularioContacto")[0].reset();
+
+                $("#btnEnviar")
+                    .prop("disabled", false)
+                    .html(`
+                        <i class="bi bi-send"></i>
+                        Enviar mensaje
+                    `);
+            },
+            error: function(xhr) {
+                console.error(xhr);
+
+                $("#resultado").html(`
+                    <div class="alert alert-danger">
+                        ❌ No se pudo enviar el mensaje.
+                        Verifica el webhook de Discord.
+                    </div>
+                `);
+
+                $("#btnEnviar")
+                    .prop("disabled", false)
+                    .html(`
+                        <i class="bi bi-send"></i>
+                        Enviar mensaje
+                    `);
+            }
+        });
+    });
+
+    const canciones = [
+        {
+            nombre: "Canción 1",
+            archivo: "mp3/cancion1.mp3"
+        },
+        {
+            nombre: "Canción 2",
+            archivo: "mp3/cancion2.mp3"
+        },
+        {
+            nombre: "Canción 3",
+            archivo: "mp3/cancion3.mp3"
+        }
+    ];
+
+    let indiceCancion = 0;
+    const reproductor = document.getElementById("reproductor");
+    const botonMusica = $("#btnMusica");
+
+    function reproducirCancion() {
+        if (canciones.length === 0) {
+            $("#nombreCancion").text("No hay canciones disponibles.");
+            return;
+        }
+
+        const cancion = canciones[indiceCancion];
+
+        reproductor.src = cancion.archivo;
+        reproductor.load();
+
+        reproductor.play()
+            .then(function() {
+                botonMusica
+                    .html('<i class="bi bi-stop-fill"></i>')
+                    .attr("data-tooltip", "Detener")
+                    .attr("aria-label", "Detener música");
+
+                $("#nombreCancion").text("Reproduciendo: " + cancion.nombre);
+            })
+            .catch(function(error) {
+                console.error(error);
+                $("#nombreCancion").text("Presiona el botón para reproducir la música.");
+                botonMusica
+                    .html('<i class="bi bi-play-fill"></i>')
+                    .attr("data-tooltip", "Reproducir")
+                    .attr("aria-label", "Reproducir música");
+            });
+    }
+
+    botonMusica.on("click", function() {
+        if (!reproductor.paused) {
+            reproductor.pause();
+            reproductor.currentTime = 0;
+
+            botonMusica
+                .html('<i class="bi bi-play-fill"></i>')
+                .attr("data-tooltip", "Reproducir")
+                .attr("aria-label", "Reproducir música");
+
+            $("#nombreCancion").text("Música detenida");
+        } else {
+            reproducirCancion();
+        }
+    });
+
+    reproductor.addEventListener("ended", function() {
+        indiceCancion++;
+
+        if (indiceCancion >= canciones.length) {
+            indiceCancion = 0;
+        }
+
+        reproducirCancion();
+    });
+
+    $(document).ready(function() {
+        reproducirCancion();
+    });
+
+    $(window).on("beforeunload", function() {
+        reproductor.pause();
+    });
+</script>
+
+</body>
+</html>

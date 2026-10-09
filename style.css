@@ -1,0 +1,1340 @@
+/* =====================================================
+   VARIABLES
+===================================================== */
+
+:root {
+
+    --verde: #5F7F38;
+    --verde-claro: #9DBB61;
+    --verde-oscuro: #30451F;
+
+    --cafe: #70452D;
+    --cafe-claro: #A66D48;
+
+    --crema: #F6EFD9;
+    --arroz: #EEE3C4;
+
+    --amarillo: #D9A62E;
+    --rosa: #B95761;
+
+    --negro: #211B17;
+    --blanco: #FFFAF0;
+
+    --fondo: #EEE3C4;
+    --texto: #211B17;
+    --tarjeta: #F6EFD9;
+
+    --sombra:
+        0 8px 20px rgba(0,0,0,0.15);
+
+}
+
+
+/* =====================================================
+   GENERAL
+===================================================== */
+
+* {
+
+    margin: 0;
+
+    padding: 0;
+
+    box-sizing: border-box;
+
+}
+
+
+html {
+
+    scroll-behavior: smooth;
+
+}
+
+
+body {
+
+    background-color: var(--fondo);
+
+    color: var(--texto);
+
+    font-family:
+        "Trebuchet MS",
+        Arial,
+        sans-serif;
+
+    transition:
+        background-color 0.5s ease,
+        color 0.5s ease;
+
+}
+
+
+/* =====================================================
+   MODO OSCURO
+===================================================== */
+
+body.modo-oscuro {
+
+    --fondo: #171512;
+
+    --texto: #F6EFD9;
+
+    --tarjeta: #29241F;
+
+    --crema: #29241F;
+
+    --arroz: #211E1A;
+
+    --blanco: #FFF8E8;
+
+    --verde: #8EAF52;
+
+    --verde-claro: #B4D16D;
+
+    --verde-oscuro: #C4DB88;
+
+    --cafe: #40291D;
+
+    --cafe-claro: #9A6443;
+
+}
+
+
+/* =====================================================
+   NAVBAR
+===================================================== */
+
+.navbar {
+
+    background-color: var(--cafe);
+
+    box-shadow:
+        0 4px 15px rgba(0,0,0,0.25);
+
+}
+
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    color: var(--blanco) !important;
+
+    text-decoration: none;
+
+}
+
+
+.logo strong {
+
+    display: block;
+
+    font-size: 20px;
+
+}
+
+
+.logo small {
+
+    display: block;
+
+    font-size: 10px;
+
+    opacity: 0.8;
+
+}
+
+
+.logo-circular {
+
+    width: 50px;
+
+    height: 50px;
+
+    min-width: 50px;
+
+    border-radius: 50%;
+
+    background-color: var(--verde);
+
+    border: 3px solid var(--verde-claro);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 25px;
+
+}
+
+
+/* =====================================================
+   BOTONES DEL MENÚ
+===================================================== */
+
+.navbar-nav button {
+
+    border: none;
+
+    background: transparent;
+
+    color: var(--blanco);
+
+    padding: 9px 10px;
+
+    margin: 3px;
+
+    border-radius: 20px;
+
+    cursor: pointer;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+}
+
+
+.navbar-nav button:hover {
+
+    background-color: var(--verde);
+
+    transform: translateY(-2px);
+
+}
+
+
+.modo-boton {
+
+    background-color:
+        var(--amarillo) !important;
+
+    color: var(--negro) !important;
+
+    width: 42px;
+
+    height: 42px;
+
+    border-radius: 50% !important;
+
+    font-size: 18px;
+
+}
+
+
+/* =====================================================
+   PÁGINAS
+===================================================== */
+
+.pagina {
+
+    display: none;
+
+    padding-top: 90px;
+
+    min-height: 80vh;
+
+}
+
+
+.pagina.activa {
+
+    display: block;
+
+    animation:
+        aparecer 0.5s ease;
+
+}
+
+
+@keyframes aparecer {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(15px);
+
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.hero {
+
+    min-height: 560px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    padding: 60px 20px;
+
+    background:
+        linear-gradient(
+            rgba(238,227,196,0.92),
+            rgba(246,239,217,0.96)
+        );
+
+}
+
+
+body.modo-oscuro .hero {
+
+    background:
+        linear-gradient(
+            rgba(25,22,19,0.95),
+            rgba(35,31,26,0.96)
+        );
+
+}
+
+
+.hero-contenido {
+
+    max-width: 800px;
+
+}
+
+
+.etiqueta {
+
+    display: inline-block;
+
+    background-color: var(--verde);
+
+    color: var(--blanco);
+
+    padding: 8px 18px;
+
+    border-radius: 30px;
+
+    font-size: 13px;
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+}
+
+
+.hero h1 {
+
+    font-size:
+        clamp(55px, 9vw, 95px);
+
+    color: var(--verde-oscuro);
+
+    font-weight: bold;
+
+    margin-bottom: 15px;
+
+}
+
+
+.hero p {
+
+    font-size: 20px;
+
+    line-height: 1.7;
+
+    margin-bottom: 25px;
+
+}
+
+
+/* =====================================================
+   BOTÓN ECO
+===================================================== */
+
+.btn-eco {
+
+    background-color: var(--verde);
+
+    color: var(--blanco);
+
+    border: none;
+
+    padding: 13px 24px;
+
+    border-radius: 30px;
+
+    font-weight: bold;
+
+    transition: 0.3s;
+
+}
+
+
+.btn-eco:hover {
+
+    background-color:
+        var(--verde-oscuro);
+
+    color: var(--blanco);
+
+    transform:
+        translateY(-3px) scale(1.03);
+
+}
+
+
+/* =====================================================
+   SECCIONES
+===================================================== */
+
+.seccion {
+
+    width: 90%;
+
+    max-width: 1200px;
+
+    margin: 60px auto;
+
+}
+
+
+.titulo-seccion {
+
+    text-align: center;
+
+    color: var(--verde-oscuro);
+
+    font-size: 36px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.subtitulo {
+
+    text-align: center;
+
+    margin-bottom: 30px;
+
+}
+
+
+/* =====================================================
+   CARRUSEL
+===================================================== */
+
+.carrusel {
+
+    border-radius: 30px;
+
+    overflow: hidden;
+
+    background-color: var(--cafe);
+
+    box-shadow: var(--sombra);
+
+}
+
+
+.slide-personaje {
+
+    min-height: 480px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 60px;
+
+    padding: 50px 100px;
+
+}
+
+
+.imagen-carrusel {
+
+    width: 350px;
+
+    height: 350px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+}
+
+
+.imagen-carrusel img {
+
+    width: 350px;
+
+    height: 350px;
+
+    object-fit: contain;
+
+}
+
+
+.texto-carrusel {
+
+    max-width: 400px;
+
+    color: var(--blanco);
+
+}
+
+
+.texto-carrusel h2 {
+
+    font-size: 40px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.texto-carrusel p {
+
+    font-size: 18px;
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   PERSONAJES
+===================================================== */
+
+.personajes {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 30px;
+
+}
+
+
+.personaje {
+
+    background-color: var(--tarjeta);
+
+    border:
+        3px solid var(--cafe);
+
+    border-radius: 25px;
+
+    padding: 20px;
+
+    min-height: 500px;
+
+    text-align: center;
+
+    box-shadow: var(--sombra);
+
+    transition: 0.3s;
+
+}
+
+
+.personaje:hover {
+
+    transform:
+        translateY(-10px);
+
+}
+
+
+.imagen-personaje {
+
+    width: 260px;
+
+    height: 300px;
+
+    margin:
+        0 auto 20px auto;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    overflow: hidden;
+
+}
+
+
+.imagen-personaje img {
+
+    width: 260px;
+
+    height: 300px;
+
+    object-fit: contain;
+
+}
+
+
+.personaje h3 {
+
+    color:
+        var(--verde-oscuro);
+
+    font-size: 24px;
+
+}
+
+
+/* =====================================================
+   CONTENIDO
+===================================================== */
+
+.contenido {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin: 45px auto;
+
+    padding: 45px;
+
+    background-color: var(--tarjeta);
+
+    border:
+        3px solid var(--cafe);
+
+    border-radius: 25px;
+
+    box-shadow: var(--sombra);
+
+}
+
+
+.contenido h2 {
+
+    color:
+        var(--verde-oscuro);
+
+    font-size: 42px;
+
+    margin-bottom: 20px;
+
+}
+
+
+.contenido h3 {
+
+    color:
+        var(--cafe-claro);
+
+    margin-top: 30px;
+
+    margin-bottom: 10px;
+
+}
+
+
+.contenido p {
+
+    line-height: 1.7;
+
+}
+
+
+/* =====================================================
+   TARJETAS
+===================================================== */
+
+.tarjetas {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 20px;
+
+    margin-top: 30px;
+
+}
+
+
+.tarjeta {
+
+    background-color:
+        var(--arroz);
+
+    border:
+        2px solid var(--verde);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    transition: 0.3s;
+
+}
+
+
+.tarjeta:hover {
+
+    transform:
+        translateY(-7px);
+
+}
+
+
+.icono-circular {
+
+    width: 75px;
+
+    height: 75px;
+
+    border-radius: 50%;
+
+    background-color:
+        var(--verde-claro);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 32px;
+
+    margin:
+        0 auto 15px auto;
+
+}
+
+
+/* =====================================================
+   COMPARACIÓN
+===================================================== */
+
+.comparacion {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 20px;
+
+    margin: 30px 0;
+
+}
+
+
+.comparacion > div {
+
+    background-color:
+        var(--arroz);
+
+    border-left:
+        6px solid var(--verde);
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+}
+
+
+/* =====================================================
+   CÓDIGO
+===================================================== */
+
+pre {
+
+    background-color:
+        var(--negro);
+
+    color:
+        var(--blanco);
+
+    padding: 20px;
+
+    border-radius: 15px;
+
+    overflow-x: auto;
+
+    margin: 20px 0;
+
+}
+
+
+code {
+
+    font-family:
+        Consolas,
+        monospace;
+
+}
+
+
+/* =====================================================
+   GOOGLE TOOLS
+===================================================== */
+
+.google-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 25px;
+
+    margin-top: 35px;
+
+}
+
+
+.google-card {
+
+    background-color:
+        var(--arroz);
+
+    border:
+        2px solid var(--verde);
+
+    border-radius: 22px;
+
+    padding: 25px;
+
+    text-align: center;
+
+    min-height: 260px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    transition: 0.3s;
+
+}
+
+
+.google-card:hover {
+
+    transform:
+        translateY(-8px) rotate(1deg);
+
+    box-shadow:
+        var(--sombra);
+
+}
+
+
+.google-icon {
+
+    width: 75px;
+
+    height: 75px;
+
+    margin:
+        0 auto 15px auto;
+
+    border-radius: 50%;
+
+    background-color:
+        var(--verde);
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-size: 35px;
+
+}
+
+
+.google-card h3 {
+
+    margin-top: 0;
+
+    color:
+        var(--verde-oscuro);
+
+}
+
+
+/* =====================================================
+   QUIZ
+===================================================== */
+
+.pregunta {
+
+    background-color:
+        var(--arroz);
+
+    border:
+        2px solid var(--cafe);
+
+    border-radius: 20px;
+
+    padding: 25px;
+
+    margin-top: 25px;
+
+}
+
+
+.pregunta h3 {
+
+    margin-top: 0;
+
+    color:
+        var(--verde-oscuro);
+
+}
+
+
+.pregunta button {
+
+    display: block;
+
+    width: 100%;
+
+    text-align: left;
+
+    padding: 13px 16px;
+
+    margin-top: 10px;
+
+    border:
+        2px solid var(--verde);
+
+    border-radius: 12px;
+
+    background-color:
+        var(--tarjeta);
+
+    color:
+        var(--texto);
+
+    cursor: pointer;
+
+    transition: 0.3s;
+
+}
+
+
+.pregunta button:hover {
+
+    background-color:
+        var(--verde-claro);
+
+    color:
+        var(--negro);
+
+}
+
+
+.respuesta-correcta {
+
+    background-color:
+        var(--verde-claro) !important;
+
+}
+
+
+.respuesta-incorrecta {
+
+    background-color:
+        #d99595 !important;
+
+}
+
+
+.correcto {
+
+    color:
+        var(--verde-oscuro);
+
+}
+
+
+.incorrecto {
+
+    color:
+        var(--rosa);
+
+}
+
+
+/* =====================================================
+   BOTONES ANTERIOR / SIGUIENTE
+===================================================== */
+
+.botones-navegacion {
+
+    width: 90%;
+
+    max-width: 1100px;
+
+    margin:
+        35px auto 50px auto;
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+}
+
+
+.botones-navegacion .btn {
+
+    min-width: 145px;
+
+}
+
+
+/* =====================================================
+   CONTACTO
+===================================================== */
+
+.contacto {
+
+    max-width: 900px;
+
+}
+
+
+.formulario-contacto {
+
+    max-width: 700px;
+
+    margin:
+        30px auto;
+
+}
+
+
+.campo {
+
+    margin-bottom: 22px;
+
+}
+
+
+.campo label {
+
+    display: block;
+
+    font-weight: bold;
+
+    margin-bottom: 8px;
+
+    color:
+        var(--verde-oscuro);
+
+}
+
+
+.campo input,
+.campo textarea {
+
+    width: 100%;
+
+    background-color:
+        var(--blanco);
+
+    border:
+        2px solid var(--verde);
+
+    border-radius: 12px;
+
+    padding: 13px;
+
+    color:
+        var(--negro);
+
+    font-family:
+        inherit;
+
+    transition: 0.3s;
+
+}
+
+
+.campo textarea {
+
+    resize: vertical;
+
+}
+
+
+.campo input:focus,
+.campo textarea:focus {
+
+    outline: none;
+
+    border-color:
+        var(--cafe);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(95,127,56,0.20);
+
+}
+
+
+.estado-formulario {
+
+    margin-top: 18px;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    font-weight: bold;
+
+}
+
+
+.estado-formulario:empty {
+
+    display: none;
+
+}
+
+
+.estado-formulario.correcto {
+
+    background-color:
+        rgba(157,187,97,0.3);
+
+}
+
+
+.estado-formulario.error {
+
+    background-color:
+        rgba(185,87,97,0.2);
+
+    color:
+        var(--rosa);
+
+}
+
+
+/* =====================================================
+   FOOTER
+===================================================== */
+
+footer {
+
+    background-color:
+        var(--cafe);
+
+    color:
+        var(--blanco);
+
+    text-align: center;
+
+    padding: 35px;
+
+    margin-top: 60px;
+
+}
+
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .personajes {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .google-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+
+    }
+
+
+    .slide-personaje {
+
+        gap: 20px;
+
+        padding: 40px;
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .personajes {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .google-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .tarjetas {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .comparacion {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .slide-personaje {
+
+        flex-direction: column;
+
+        text-align: center;
+
+        padding:
+            50px 30px;
+
+    }
+
+
+    .imagen-carrusel {
+
+        width: 260px;
+
+        height: 260px;
+
+    }
+
+
+    .imagen-carrusel img {
+
+        width: 260px;
+
+        height: 260px;
+
+    }
+
+
+    .texto-carrusel h2 {
+
+        font-size: 30px;
+
+    }
+
+
+    .contenido {
+
+        padding: 25px;
+
+    }
+
+
+    .botones-navegacion {
+
+        flex-direction: column;
+
+    }
+
+
+    .botones-navegacion .btn {
+
+        width: 100%;
+
+    }
+
+}
+
+
+@media (max-width: 500px) {
+
+    .imagen-personaje {
+
+        width: 230px;
+
+        height: 270px;
+
+    }
+
+
+    .imagen-personaje img {
+
+        width: 230px;
+
+        height: 270px;
+
+    }
+
+
+    .contenido h2 {
+
+        font-size: 32px;
+
+    }
+
+}
