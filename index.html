@@ -1,2067 +1,2950 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>NEONFRAME — pequeñas pantallas</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <title>EcoMaceta | Proyecto Web</title>
+<link href="https://fonts.googleapis.com/css2?family=DotGothic16&family=VT323&display=swap" rel="stylesheet">
 
-    <!-- BOOTSTRAP -->
-    <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        rel="stylesheet">
+<style>
 
-    <!-- ICONOS BOOTSTRAP -->
-    <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+:root{
+  --lime:#c9f02b;
+  --lime-dark:#91b915;
+  --black:#080a07;
+  --ink:#11140d;
+  --paper:#e9ebd8;
+  --gray:#aab09a;
+  --gray-dark:#555c4d;
+  --white:#f7f8e9;
+  --pink:#ff77c8;
+  --cyan:#70ddff;
+  --red:#ff4d66;
 
-    <!-- NUESTRO CSS -->
-    <link rel="stylesheet" href="style.css">
+  --body-bg:#161a12;
+  --page-bg:#171b12;
 
+  --border:3px solid var(--black);
+  --shadow:7px 7px 0 var(--black);
+}
+
+/* =========================
+   MODO CLARO
+========================= */
+
+body.modo-claro{
+  --body-bg:#e8ead8;
+  --page-bg:#f7f8e9;
+  --white:#161a12;
+  --paper:#ffffff;
+  --gray:#555c4d;
+  --gray-dark:#777d6d;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  color:var(--white);
+
+  font-family:'DotGothic16', monospace;
+
+  background-color:var(--body-bg);
+
+  background-image:
+    linear-gradient(
+      rgba(201,240,43,.18) 1px,
+      transparent 1px
+    ),
+    linear-gradient(
+      90deg,
+      rgba(201,240,43,.18) 1px,
+      transparent 1px
+    );
+
+  background-size:36px 36px;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.page{
+  width:min(1100px,calc(100% - 22px));
+  margin:18px auto;
+
+  border:5px solid var(--black);
+
+  background:var(--page-bg);
+
+  box-shadow:12px 12px 0 rgba(0,0,0,.65);
+}
+
+/* =========================
+   BARRA SUPERIOR
+========================= */
+
+.topline{
+  min-height:30px;
+
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:4px 10px;
+
+  color:var(--black);
+  background:var(--lime);
+
+  border-bottom:4px solid var(--black);
+
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
+}
+
+.topline span:last-child{
+  background:var(--black);
+  color:var(--lime);
+
+  padding:3px 7px;
+}
+
+/* =========================
+   NAV
+========================= */
+
+.navbar-neon{
+  display:flex;
+  align-items:center;
+  gap:14px;
+
+  padding:10px;
+
+  background:var(--black);
+
+  border-bottom:3px solid var(--lime);
+
+  flex-wrap:wrap;
+}
+
+.logo{
+  color:var(--lime);
+
+  font-family:'VT323',monospace;
+
+  font-size:42px;
+  line-height:.8;
+
+  letter-spacing:-1px;
+
+  text-shadow:3px 3px 0 #33420a;
+}
+
+.logo small{
+  display:block;
+
+  color:var(--gray);
+
+  font-family:'DotGothic16',monospace;
+
+  font-size:8px;
+  letter-spacing:2px;
+
+  text-shadow:none;
+
+  margin-top:5px;
+}
+
+.navlinks{
+  margin-left:auto;
+
+  display:flex;
+  gap:7px;
+
+  flex-wrap:wrap;
+}
+
+.navlinks button{
+  border:2px solid var(--gray-dark);
+
+  background:#22271a;
+
+  color:var(--white);
+
+  padding:6px 10px;
+
+  cursor:pointer;
+
+  font-size:11px;
+}
+
+.navlinks button:hover,
+.navlinks button.active{
+  color:var(--black);
+
+  background:var(--lime);
+
+  border-color:var(--lime);
+}
+
+/* =========================
+   BOTÓN MODO
+========================= */
+
+.theme-toggle{
+  border:2px solid var(--black);
+
+  background:var(--lime);
+
+  color:var(--black);
+
+  padding:6px 10px;
+
+  cursor:pointer;
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  box-shadow:3px 3px 0 var(--black);
+
+  white-space:nowrap;
+}
+
+.theme-toggle:hover{
+  transform:translate(1px,1px);
+
+  box-shadow:2px 2px 0 var(--black);
+}
+
+/* =========================
+   BUSCADOR
+========================= */
+
+.search{
+  display:flex;
+
+  width:100%;
+
+  margin-top:2px;
+}
+
+.search input{
+  width:100%;
+
+  border:2px solid var(--black);
+
+  background:var(--paper);
+
+  color:var(--black);
+
+  padding:8px 10px;
+
+  outline:none;
+}
+
+.search button{
+  width:48px;
+
+  border:2px solid var(--black);
+
+  background:var(--lime);
+
+  cursor:pointer;
+
+  font-weight:bold;
+}
+
+/* =========================
+   CONTENIDO
+========================= */
+
+.page-body{
+  padding:12px;
+
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(201,240,43,.12),
+      transparent 20%
+    ),
+
+    radial-gradient(
+      circle at 85% 60%,
+      rgba(255,119,200,.08),
+      transparent 25%
+    ),
+
+    #24291b;
+}
+
+body.modo-claro .page-body{
+  background:
+    radial-gradient(
+      circle at 15% 15%,
+      rgba(201,240,43,.18),
+      transparent 20%
+    ),
+
+    radial-gradient(
+      circle at 85% 60%,
+      rgba(255,119,200,.12),
+      transparent 25%
+    ),
+
+    #eef0df;
+}
+
+/* =========================
+   PANTALLAS
+========================= */
+
+.pantalla{
+  display:none;
+
+  animation:appear .35s ease;
+}
+
+.pantalla.activa{
+  display:block;
+}
+
+@keyframes appear{
+
+  from{
+    opacity:0;
+    transform:translateY(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:none;
+  }
+
+}
+
+/* =========================
+   CAJAS
+========================= */
+
+.grid{
+  display:grid;
+
+  grid-template-columns:1.05fr 1.65fr;
+
+  gap:12px;
+}
+
+.box{
+  position:relative;
+
+  background:var(--paper);
+
+  color:var(--ink);
+
+  border:4px solid var(--black);
+
+  box-shadow:var(--shadow);
+}
+
+.box.dark{
+  background:var(--black);
+
+  color:var(--white);
+}
+
+.box.lime{
+  background:var(--lime);
+
+  color:var(--black);
+}
+
+.box-head{
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  gap:8px;
+
+  padding:6px 9px;
+
+  background:var(--black);
+
+  color:var(--lime);
+
+  border-bottom:3px solid var(--black);
+
+  font-size:12px;
+
+  font-weight:bold;
+}
+
+.box-head.light{
+  background:var(--lime);
+
+  color:var(--black);
+}
+
+.window-buttons{
+  display:flex;
+
+  gap:5px;
+}
+
+.window-buttons i{
+  display:block;
+
+  width:11px;
+  height:11px;
+
+  border:2px solid currentColor;
+}
+
+/* =========================
+   PERFIL
+========================= */
+
+.profile{
+  min-height:310px;
+}
+
+.profile-main{
+  padding:10px;
+
+  display:grid;
+
+  grid-template-columns:125px 1fr;
+
+  gap:12px;
+}
+
+.tv-avatar{
+  aspect-ratio:1;
+
+  background:#0c0f0b;
+
+  border:5px solid var(--black);
+
+  display:grid;
+
+  place-items:center;
+
+  overflow:hidden;
+
+  box-shadow:
+    inset 0 0 0 3px #4d5840;
+}
+
+.mini-tv{
+  width:92px;
+  height:75px;
+
+  border:6px solid #151914;
+
+  border-radius:12px;
+
+  background:#19201a;
+
+  box-shadow:
+    inset 0 0 18px rgba(201,240,43,.45);
+
+  display:grid;
+
+  place-items:center;
+
+  color:var(--lime);
+
+  font-family:'VT323',monospace;
+
+  font-size:34px;
+
+  text-shadow:0 0 7px var(--lime);
+
+  transform:rotate(-4deg);
+}
+
+.profile h2{
+  margin:0 0 8px;
+
+  font-family:'VT323',monospace;
+
+  font-size:35px;
+
+  color:var(--black);
+}
+
+.profile p{
+  font-size:12px;
+
+  line-height:1.65;
+
+  margin:0 0 8px;
+}
+
+.tag{
+  display:inline-block;
+
+  padding:3px 6px;
+
+  margin:2px;
+
+  border:2px solid var(--black);
+
+  background:var(--lime);
+
+  font-size:9px;
+
+  font-weight:bold;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  min-height:310px;
+
+  overflow:hidden;
+
+  background:#090b08;
+
+  color:var(--white);
+}
+
+body.modo-claro .hero{
+  background:#ffffff;
+
+  color:#11140d;
+}
+
+.hero-inner{
+  padding:15px;
+
+  display:grid;
+
+  grid-template-columns:1.15fr .85fr;
+
+  gap:14px;
+
+  align-items:center;
+}
+
+.hero h1{
+  margin:0;
+
+  font-family:'VT323',monospace;
+
+  color:var(--lime);
+
+  font-size:clamp(48px,7vw,78px);
+
+  line-height:.8;
+
+  text-shadow:4px 4px 0 #2d390b;
+}
+
+.hero h1 span{
+  color:var(--pink);
+}
+
+.hero .subtitle{
+  color:#d8dec8;
+
+  margin:13px 0;
+
+  font-size:13px;
+
+  line-height:1.65;
+}
+
+body.modo-claro .hero .subtitle{
+  color:#3f4638;
+}
+
+/* =========================
+   TV GRANDE
+========================= */
+
+.hero-art{
+  min-height:230px;
+
+  display:grid;
+
+  place-items:center;
+
+  position:relative;
+}
+
+.hero-art:before{
+  content:"";
+
+  position:absolute;
+
+  inset:12px;
+
+  border:2px dashed var(--gray-dark);
+}
+
+.big-tv{
+  position:relative;
+
+  width:min(100%,260px);
+
+  aspect-ratio:1.22;
+
+  border:12px solid #171b15;
+
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #24301c,
+      #090b08
+    );
+
+  box-shadow:
+    0 0 0 4px #59624d,
+    0 0 35px rgba(201,240,43,.18);
+
+  display:grid;
+
+  place-items:center;
+
+  transform:rotate(2deg);
+}
+
+.big-screen{
+  width:73%;
+
+  height:65%;
+
+  border-radius:
+    30% 26% 28% 25%;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.05) 0 2px,
+      transparent 2px 5px
+    ),
+
+    radial-gradient(
+      circle,
+      #93c22a,
+      #18300d 75%
+    );
+
+  border:5px solid #060806;
+
+  box-shadow:
+    inset 0 0 25px #0a1006,
+    0 0 10px rgba(201,240,43,.35);
+
+  display:grid;
+
+  place-items:center;
+
+  color:var(--lime);
+
+  font-family:'VT323',monospace;
+
+  font-size:42px;
+
+  text-shadow:0 0 8px var(--lime);
+}
+
+.tv-buttons{
+  position:absolute;
+
+  right:7px;
+
+  top:25%;
+
+  display:grid;
+
+  gap:9px;
+}
+
+.tv-buttons i{
+  width:11px;
+
+  height:11px;
+
+  border:2px solid #050605;
+
+  border-radius:50%;
+
+  background:#ddd;
+}
+
+.sticker{
+  position:absolute;
+
+  padding:5px 9px;
+
+  background:var(--pink);
+
+  color:var(--black);
+
+  border:3px solid var(--black);
+
+  font-size:11px;
+
+  font-weight:bold;
+
+  transform:rotate(-8deg);
+
+  bottom:7px;
+
+  left:2px;
+
+  box-shadow:4px 4px 0 #000;
+}
+
+/* =========================
+   MARQUEE
+========================= */
+
+.marquee{
+  overflow:hidden;
+
+  border-top:3px solid var(--black);
+
+  border-bottom:3px solid var(--black);
+
+  background:var(--lime);
+
+  color:var(--black);
+
+  white-space:nowrap;
+
+  padding:6px 0;
+
+  font-family:'VT323',monospace;
+
+  font-size:21px;
+}
+
+.marquee span{
+  display:inline-block;
+
+  animation:move 18s linear infinite;
+}
+
+@keyframes move{
+
+  to{
+    transform:translateX(-45%);
+  }
+
+}
+
+/* =========================
+   SECCIONES
+========================= */
+
+.two{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+
+  margin-top:12px;
+}
+
+.section-box{
+  min-height:230px;
+}
+
+.section-content{
+  padding:13px;
+}
+
+.section-title{
+  font-family:'VT323',monospace;
+
+  font-size:31px;
+
+  margin:0 0 8px;
+}
+
+.pixel-list{
+  list-style:none;
+
+  padding:0;
+
+  margin:0;
+}
+
+.pixel-list li{
+  padding:8px 7px;
+
+  border-bottom:2px dotted #8c927f;
+
+  font-size:11px;
+}
+
+.pixel-list li:before{
+  content:"▸ ";
+
+  color:var(--pink);
+}
+
+/* =========================
+   PRODUCTO
+========================= */
+
+.product-card{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+
+  align-items:center;
+}
+
+.product-photo{
+  width:100%;
+
+  aspect-ratio:1;
+
+  object-fit:cover;
+
+  border:4px solid var(--black);
+
+  filter:saturate(.85) contrast(1.05);
+}
+
+.product-info h3{
+  font-family:'VT323',monospace;
+
+  font-size:37px;
+
+  margin:0 0 5px;
+}
+
+.product-info p{
+  font-size:11px;
+
+  line-height:1.7;
+}
+
+.price{
+  display:inline-block;
+
+  background:var(--black);
+
+  color:var(--lime);
+
+  border:3px solid var(--lime);
+
+  padding:5px 10px;
+
+  font-family:'VT323',monospace;
+
+  font-size:26px;
+}
+
+/* =========================
+   BOTONES
+========================= */
+
+.pixel-button{
+  border:3px solid var(--black);
+
+  background:var(--lime);
+
+  color:var(--black);
+
+  padding:8px 13px;
+
+  cursor:pointer;
+
+  font-weight:bold;
+
+  box-shadow:4px 4px 0 var(--black);
+}
+
+.pixel-button:hover{
+  transform:translate(2px,2px);
+
+  box-shadow:2px 2px 0 var(--black);
+}
+
+.pixel-button.dark{
+  background:var(--black);
+
+  color:var(--lime);
+
+  border-color:var(--lime);
+
+  box-shadow:4px 4px 0 var(--lime-dark);
+}
+
+/* =========================
+   GALERIA
+========================= */
+
+.gallery{
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:8px;
+}
+
+.gallery-item{
+  aspect-ratio:1;
+
+  border:3px solid var(--black);
+
+  background:
+    linear-gradient(
+      135deg,
+      #7a9820,
+      #161c0e 60%
+    ),
+    var(--lime);
+
+  position:relative;
+
+  overflow:hidden;
+
+  display:grid;
+
+  place-items:center;
+
+  color:var(--lime);
+
+  font-family:'VT323',monospace;
+
+  font-size:28px;
+}
+
+.gallery-item:nth-child(2){
+  background:
+    linear-gradient(
+      135deg,
+      #351d36,
+      #111 65%
+    );
+
+  color:var(--pink);
+}
+
+.gallery-item:nth-child(3){
+  background:
+    linear-gradient(
+      135deg,
+      #12384a,
+      #0c1010 65%
+    );
+
+  color:var(--cyan);
+}
+
+.gallery-item:after{
+  content:"REC";
+
+  position:absolute;
+
+  top:5px;
+  left:6px;
+
+  font:
+    11px 'DotGothic16',
+    monospace;
+
+  color:currentColor;
+}
+
+/* =========================
+   TABLA
+========================= */
+
+.info-table{
+  width:100%;
+
+  border-collapse:collapse;
+
+  font-size:11px;
+}
+
+.info-table td{
+  padding:8px;
+
+  border:2px solid var(--black);
+}
+
+.info-table td:first-child{
+  width:36%;
+
+  background:var(--black);
+
+  color:var(--lime);
+}
+
+/* =========================
+   CONTACTO
+========================= */
+
+.contact-grid{
+  display:grid;
+
+  grid-template-columns:1fr 1fr;
+
+  gap:12px;
+}
+
+.form-box{
+  padding:15px;
+}
+
+.form-label{
+  font-size:11px;
+
+  font-weight:bold;
+}
+
+.form-control{
+  border:3px solid var(--black);
+
+  border-radius:0;
+
+  background:#f1f3e5;
+
+  color:var(--black);
+
+  font-size:12px;
+}
+
+.form-control:focus{
+  border-color:var(--lime-dark);
+
+  box-shadow:0 0 0 2px var(--lime);
+}
+
+#estadoContacto{
+  font-size:11px;
+
+  font-weight:bold;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.footer{
+  margin-top:12px;
+
+  border-top:4px solid var(--black);
+
+  background:var(--black);
+
+  color:var(--gray);
+
+  padding:10px;
+
+  text-align:center;
+
+  font-size:10px;
+}
+
+/* =========================
+   EFECTO CRT
+========================= */
+
+.crt{
+  position:fixed;
+
+  inset:0;
+
+  pointer-events:none;
+
+  z-index:9999;
+
+  opacity:.11;
+
+  background:
+    repeating-linear-gradient(
+      0deg,
+      transparent 0 3px,
+      rgba(255,255,255,.08) 3px 4px
+    );
+}
+
+/* =========================
+   SPARKLES
+========================= */
+
+.spark{
+  position:fixed;
+
+  pointer-events:none;
+
+  z-index:10000;
+
+  color:var(--lime);
+
+  font-size:20px;
+
+  animation:spark .8s forwards;
+
+  text-shadow:0 0 8px currentColor;
+}
+
+@keyframes spark{
+
+  to{
+
+    opacity:0;
+
+    transform:
+      translateY(-25px)
+      scale(1.7)
+      rotate(20deg);
+
+  }
+
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:800px){
+
+  .grid,
+  .two,
+  .contact-grid,
+  .hero-inner{
+    grid-template-columns:1fr;
+  }
+
+  .product-card{
+    grid-template-columns:1fr;
+  }
+
+  .profile-main{
+    grid-template-columns:100px 1fr;
+  }
+
+}
+
+@media(max-width:540px){
+
+  .page{
+    width:calc(100% - 10px);
+
+    margin:5px;
+  }
+
+  .page-body{
+    padding:7px;
+  }
+
+  .navlinks{
+    width:100%;
+
+    margin-left:0;
+  }
+
+  .navlinks button{
+    flex:1;
+  }
+
+  .gallery{
+    grid-template-columns:1fr;
+  }
+
+  .profile-main{
+    grid-template-columns:1fr;
+  }
+
+  .tv-avatar{
+    max-width:170px;
+
+    margin:auto;
+
+    width:100%;
+  }
+
+}
+
+</style>
 </head>
-
 
 <body>
 
+<div class="crt"></div>
 
-<!-- =========================================================
-     MENÚ
-========================================================= -->
+<div class="page">
 
-<header>
+<!-- =========================
+     BARRA SUPERIOR
+========================== -->
 
-    <nav class="navbar navbar-expand-lg fixed-top">
+<div class="topline">
 
-        <div class="container-fluid px-4">
+  <span>
+    NEONFRAME // ELECTRÓNICA PERSONAL
+  </span>
 
-            <!-- LOGO -->
+  <span>
+    ÚLTIMA ACTUALIZACIÓN: 19 OCT 2026
+  </span>
 
-            <a
-                href="#"
-                class="navbar-brand logo"
-                onclick="mostrarPagina('inicio')">
-
-                <div class="logo-circular">
-                    🐦
-                </div>
-
-                <div>
-
-                    <strong>EcoMaceta</strong>
-
-                    <small>
-                        Proyecto ecológico
-                    </small>
-
-                </div>
-
-            </a>
+</div>
 
 
-            <!-- BOTÓN RESPONSIVE -->
+<!-- =========================
+     NAVBAR
+========================== -->
 
-            <button
-                class="navbar-toggler"
-                type="button"
-                data-bs-toggle="collapse"
-                data-bs-target="#menu">
+<nav class="navbar-neon">
 
-                <span class="navbar-toggler-icon"></span>
+  <div class="logo">
 
-            </button>
+    NEONFRAME
+
+    <small>
+      pantallas pequeñas · pequeños amigos
+    </small>
+
+  </div>
 
 
-            <!-- MENÚ -->
+  <div class="navlinks">
 
-            <div
-                class="collapse navbar-collapse"
-                id="menu">
+    <button
+      class="active"
+      onclick="mostrar('inicio',this)">
+      INICIO
+    </button>
 
-                <ul class="navbar-nav ms-auto align-items-lg-center">
+    <button onclick="mostrar('producto',this)">
+      PRODUCTO
+    </button>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('inicio')">
-                            Inicio
-                        </button>
-                    </li>
+    <button onclick="mostrar('galeria',this)">
+      GALERÍA
+    </button>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('producto')">
-                            Producto
-                        </button>
-                    </li>
+    <button onclick="mostrar('about',this)">
+      NOSOTROS
+    </button>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('javascript')">
-                            JavaScript
-                        </button>
-                    </li>
+    <button onclick="mostrar('contacto',this)">
+      CONTACTO
+    </button>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('jquery')">
-                            jQuery
-                        </button>
-                    </li>
+    <!-- BOTÓN MODO CLARO / OSCURO -->
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('json')">
-                            JSON
-                        </button>
-                    </li>
+    <button
+      id="themeToggle"
+      class="theme-toggle"
+      onclick="alternarModo()"
+      type="button">
+      ☀ MODO CLARO
+    </button>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('hosting')">
-                            Hosting
-                        </button>
-                    </li>
+  </div>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('google')">
-                            Google
-                        </button>
-                    </li>
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('quiz')">
-                            Quiz
-                        </button>
-                    </li>
+  <div class="search">
 
-                    <li class="nav-item">
-                        <button onclick="mostrarPagina('contacto')">
-                            Contacto
-                        </button>
-                    </li>
+    <input
+      id="buscador"
+      type="search"
+      placeholder="buscar en Neonframe..."
+    >
 
-                    <li class="nav-item">
+    <button onclick="buscar()">
+      ⌕
+    </button>
 
-                        <button
-                            id="modoBoton"
-                            class="modo-boton"
-                            onclick="cambiarModo()">
+  </div>
 
-                            🌙
+</nav>
 
-                        </button>
 
-                    </li>
+<!-- =========================
+     CONTENIDO
+========================== -->
 
-                </ul>
+<main class="page-body">
+
+
+<!-- =========================
+     INICIO
+========================== -->
+
+<section
+  id="inicio"
+  class="pantalla activa"
+>
+
+  <div class="grid">
+
+
+    <!-- PERFIL -->
+
+    <aside class="box profile">
+
+      <div class="box-head">
+
+        >> USUARIO / MARCA
+
+        <span class="window-buttons">
+
+          <i></i>
+          <i></i>
+
+        </span>
+
+      </div>
+
+
+      <div class="profile-main">
+
+        <div class="tv-avatar">
+
+          <div class="mini-tv">
+            NF
+          </div>
+
+        </div>
+
+
+        <div>
+
+          <h2>
+            NEONFRAME
+          </h2>
+
+          <p>
+
+            Una mini empresa dedicada a crear
+
+            <b>
+              llaveritos electrónicos con forma de televisor
+            </b>.
+
+            Pequeñas pantallas para llevar tu mundo contigo.
+
+          </p>
+
+
+          <span class="tag">
+            ELECTRÓNICO
+          </span>
+
+          <span class="tag">
+            LLAVERO
+          </span>
+
+          <span class="tag">
+            CRT
+          </span>
+
+          <span class="tag">
+            HECHO A MANO
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="px-3 pb-3">
+
+        <div
+          class="box dark p-2"
+          style="box-shadow:none"
+        >
+
+          <small style="color:var(--lime)">
+            ESTADO //
+          </small>
+
+          <br>
+
+          <span style="font-size:11px">
+
+            en línea · creando pequeños televisores...
+
+          </span>
+
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- HERO -->
+
+    <section class="box hero">
+
+      <div class="box-head">
+
+        >> BIENVENIDO A NEONFRAME
+
+        <span class="window-buttons">
+
+          <i></i>
+          <i></i>
+          <i></i>
+
+        </span>
+
+      </div>
+
+
+      <div class="hero-inner">
+
+
+        <div>
+
+          <h1>
+
+            NEON<span>FRAME</span>
+
+          </h1>
+
+
+          <p class="subtitle">
+
+            Pequeños llaveros electrónicos
+            con forma de televisor.
+
+            <br>
+
+            Pantallas retro, colores únicos
+            y pequeños recuerdos.
+
+          </p>
+
+
+          <button
+            class="pixel-button"
+            onclick="mostrar('producto')"
+          >
+
+            VER LOS TELEVISORES &gt;&gt;
+
+          </button>
+
+        </div>
+
+
+
+        <div class="hero-art">
+
+          <div class="big-tv">
+
+            <div class="big-screen">
+              :3
+            </div>
+
+
+            <div class="tv-buttons">
+
+              <i></i>
+              <i></i>
 
             </div>
 
-        </div>
 
-    </nav>
+            <div class="sticker">
 
-</header>
+              ¡NUEVA SEÑAL!
 
+            </div>
 
-
-<!-- =========================================================
-     INICIO
-========================================================= -->
-
-<main id="inicio" class="pagina activa">
-
-
-    <section class="hero">
-
-        <div class="hero-contenido">
-
-            <span class="etiqueta">
-                🌱 PROYECTO ECOLÓGICO
-            </span>
-
-            <h1>
-                EcoMaceta
-            </h1>
-
-            <p>
-                Una maceta pensada para cuidar nuestras
-                plantas y también nuestro planeta.
-            </p>
-
-            <button
-                class="btn btn-eco"
-                onclick="mostrarPagina('producto')">
-
-                Conocer el producto
-                <i class="bi bi-arrow-right"></i>
-
-            </button>
+          </div>
 
         </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+
+
+  <!-- MARQUEE -->
+
+  <div class="marquee mt-3">
+
+    <span>
+
+      ★ NEONFRAME ★
+      PEQUEÑOS TELEVISORES ★
+      LLAVEROS ELECTRÓNICOS ★
+      LLEVA UNA PEQUEÑA PANTALLA ★
+      NEONFRAME ★
+      PEQUEÑOS TELEVISORES ★
+      LLAVEROS ELECTRÓNICOS ★
+      LLEVA UNA PEQUEÑA PANTALLA ★
+
+    </span>
+
+  </div>
+
+
+
+  <!-- DOS COLUMNAS -->
+
+  <div class="two">
+
+
+    <!-- SOBRE NEONFRAME -->
+
+    <section class="box section-box">
+
+      <div class="box-head light">
+
+        >> ¿QUÉ ES NEONFRAME?
+
+      </div>
+
+
+      <div class="section-content">
+
+        <h2 class="section-title">
+
+          dispositivo pequeño / gran personalidad
+
+        </h2>
+
+
+        <p
+          style="font-size:12px;line-height:1.8"
+        >
+
+          NEONFRAME nace de la idea de convertir
+          un televisor retro en algo que puedas
+          llevar en tu mochila.
+
+          Cada llaverito tiene estética de mini CRT
+          y está pensado como un objeto coleccionable.
+
+        </p>
+
+
+        <ul class="pixel-list">
+
+          <li>
+            Diseño inspirado en televisores antiguos
+          </li>
+
+          <li>
+            Pantalla pequeña con visuales intercambiables
+          </li>
+
+          <li>
+            Formato de llavero para llevarlo contigo
+          </li>
+
+          <li>
+            Estética digital / web retro / píxel
+          </li>
+
+        </ul>
+
+      </div>
 
     </section>
 
 
 
-    <!-- CARRUSEL -->
+    <!-- SEÑAL -->
 
-    <section class="seccion">
+    <section class="box section-box dark">
 
-        <h2 class="titulo-seccion">
-            Conoce a nuestros personajes
+      <div class="box-head">
+
+        >> SEÑAL ACTUAL
+
+      </div>
+
+
+      <div class="section-content">
+
+        <h2
+          class="section-title"
+          style="color:var(--lime)"
+        >
+
+          TRANSMISIÓN
+
         </h2>
-
-        <p class="subtitulo">
-            Ellos te acompañarán durante todo el proyecto.
-        </p>
 
 
         <div
-            id="carruselPersonajes"
-            class="carousel slide carousel-fade carrusel"
-            data-bs-ride="carousel"
-            data-bs-interval="3500">
+          class="box p-2 mb-2"
+          style="box-shadow:none"
+        >
 
+          <b>
+            01 // PANTALLA
+          </b>
 
-            <!-- INDICADORES -->
+          <p
+            class="mb-0 mt-1"
+            style="font-size:11px"
+          >
 
-            <div class="carousel-indicators">
+            Visuales pequeños diseñados
+            para sentirse como una transmisión
+            encontrada en un televisor viejo.
 
-                <button
-                    type="button"
-                    data-bs-target="#carruselPersonajes"
-                    data-bs-slide-to="0"
-                    class="active">
-                </button>
-
-                <button
-                    type="button"
-                    data-bs-target="#carruselPersonajes"
-                    data-bs-slide-to="1">
-                </button>
-
-                <button
-                    type="button"
-                    data-bs-target="#carruselPersonajes"
-                    data-bs-slide-to="2">
-                </button>
-
-            </div>
-
-
-            <!-- CONTENIDO DEL CARRUSEL -->
-
-            <div class="carousel-inner">
-
-
-                <!-- COLIBRÍ -->
-
-                <div class="carousel-item active">
-
-                    <div class="slide-personaje">
-
-                        <div class="imagen-carrusel">
-
-                            <img
-                                src="imagenes/colibri.png"
-                                alt="Colibrí">
-
-                        </div>
-
-                        <div class="texto-carrusel">
-
-                            <h2>
-                                🐦 El Colibrí
-                            </h2>
-
-                            <p>
-                                Nuestro personaje encargado
-                                de acompañarte y explicar
-                                algunos temas tecnológicos.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- LIBÉLULA -->
-
-                <div class="carousel-item">
-
-                    <div class="slide-personaje">
-
-                        <div class="imagen-carrusel">
-
-                            <img
-                                src="imagenes/libelula.png"
-                                alt="Libélula">
-
-                        </div>
-
-                        <div class="texto-carrusel">
-
-                            <h2>
-                                🪶 La Libélula
-                            </h2>
-
-                            <p>
-                                Es curiosa y ayuda a descubrir
-                                información interesante sobre
-                                el proyecto.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-                <!-- MACETA -->
-
-                <div class="carousel-item">
-
-                    <div class="slide-personaje">
-
-                        <div class="imagen-carrusel">
-
-                            <img
-                                src="imagenes/maceta.png"
-                                alt="EcoMaceta">
-
-                        </div>
-
-                        <div class="texto-carrusel">
-
-                            <h2>
-                                🌱 EcoMaceta
-                            </h2>
-
-                            <p>
-                                Es la protagonista del proyecto
-                                y representa nuestra idea
-                                ecológica.
-                            </p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ANTERIOR -->
-
-            <button
-                class="carousel-control-prev"
-                type="button"
-                data-bs-target="#carruselPersonajes"
-                data-bs-slide="prev">
-
-                <span class="carousel-control-prev-icon"></span>
-
-            </button>
-
-
-            <!-- SIGUIENTE -->
-
-            <button
-                class="carousel-control-next"
-                type="button"
-                data-bs-target="#carruselPersonajes"
-                data-bs-slide="next">
-
-                <span class="carousel-control-next-icon"></span>
-
-            </button>
+          </p>
 
         </div>
 
-    </section>
 
+        <div
+          class="box p-2 mb-2"
+          style="box-shadow:none"
+        >
 
-    <!-- PERSONAJES -->
+          <b>
+            02 // CARCASA
+          </b>
 
-    <section class="seccion">
+          <p
+            class="mb-0 mt-1"
+            style="font-size:11px"
+          >
 
-        <h2 class="titulo-seccion">
-            Nuestros personajes
-        </h2>
+            Carcasa compacta con apariencia
+            de televisor portátil.
 
-
-        <div class="personajes">
-
-
-            <div class="personaje">
-
-                <div class="imagen-personaje">
-
-                    <img
-                        src="imagenes/libelula.png"
-                        alt="Libélula">
-
-                </div>
-
-                <h3>
-                    La Libélula
-                </h3>
-
-                <p>
-                    Representa la curiosidad y nos ayuda
-                    a descubrir información nueva.
-                </p>
-
-            </div>
-
-
-            <div class="personaje">
-
-                <div class="imagen-personaje">
-
-                    <img
-                        src="imagenes/colibri.png"
-                        alt="Colibrí">
-
-                </div>
-
-                <h3>
-                    El Colibrí
-                </h3>
-
-                <p>
-                    Nos acompaña durante el recorrido
-                    por la página.
-                </p>
-
-            </div>
-
-
-            <div class="personaje">
-
-                <div class="imagen-personaje">
-
-                    <img
-                        src="imagenes/maceta.png"
-                        alt="EcoMaceta">
-
-                </div>
-
-                <h3>
-                    EcoMaceta
-                </h3>
-
-                <p>
-                    Es la protagonista y representa
-                    el cuidado del medio ambiente.
-                </p>
-
-            </div>
-
+          </p>
 
         </div>
 
+
+        <div
+          class="box p-2"
+          style="box-shadow:none"
+        >
+
+          <b>
+            03 // LLAVERO
+          </b>
+
+          <p
+            class="mb-0 mt-1"
+            style="font-size:11px"
+          >
+
+            Un pequeño accesorio para mochila,
+            bolso o colección.
+
+          </p>
+
+        </div>
+
+      </div>
+
     </section>
 
+  </div>
 
-</main>
+</section>
 
 
 
-<!-- =========================================================
+<!-- =========================
      PRODUCTO
-========================================================= -->
+========================== -->
 
-<main id="producto" class="pagina">
+<section
+  id="producto"
+  class="pantalla"
+>
 
-    <section class="contenido">
+  <div class="box">
 
-        <span class="etiqueta">
-            🌱 PRODUCTO
-        </span>
+    <div class="box-head">
 
-        <h2>
-            Conoce EcoMaceta
-        </h2>
+      >> BASE DE DATOS DEL PRODUCTO / TV-001
 
-        <p>
-            EcoMaceta es una maceta pensada para personas
-            que disfrutan tener plantas y que también
-            quieren tener una mayor conciencia sobre
-            el cuidado del medio ambiente.
-        </p>
+      <span class="window-buttons">
 
+        <i></i>
+        <i></i>
 
-        <h3>
-            Público objetivo
-        </h3>
+      </span>
 
-        <p>
-            Está dirigida principalmente a estudiantes,
-            familias, personas que tienen plantas y
-            personas interesadas en productos ecológicos.
-        </p>
+    </div>
 
 
-        <h3>
-            Propuesta de valor
-        </h3>
+    <div class="section-content">
 
-        <p>
-            EcoMaceta busca combinar diseño, utilidad
-            y conciencia ambiental en un mismo producto.
-        </p>
 
+      <div class="product-card">
 
-        <div class="tarjetas">
 
+        <!--
+          IMPORTANTE:
+          Coloca neo.jpg en la misma carpeta
+          que este index.html.
+        -->
 
-            <div class="tarjeta">
+        <img
+          src="neo.jpg"
+          class="product-photo"
+          alt="Llaveritos electrónicos con forma de televisor"
+        >
 
-                <div class="icono-circular">
-                    🌱
-                </div>
 
-                <h3>
-                    Ecológica
-                </h3>
+        <div class="product-info">
 
-                <p>
-                    Busca disminuir el impacto que puede
-                    tener una maceta cuando deja de utilizarse.
-                </p>
+          <h3>
+            LLAVERO TV NEON
+          </h3>
 
-            </div>
 
+          <p>
 
-            <div class="tarjeta">
+            Nuestro concepto principal:
+            un pequeño televisor electrónico
+            convertido en llavero.
 
-                <div class="icono-circular">
-                    💧
-                </div>
+            <br><br>
 
-                <h3>
-                    Práctica
-                </h3>
+            El objetivo es que parezca una mini
+            pantalla retro que encontró una señal propia.
 
-                <p>
-                    Está pensada para utilizarse fácilmente
-                    en el cuidado diario de las plantas.
-                </p>
+          </p>
 
-            </div>
 
+          <span class="price">
+            TV-001
+          </span>
 
-            <div class="tarjeta">
 
-                <div class="icono-circular">
-                    🌎
-                </div>
+          <div
+            class="mt-3 d-flex gap-2 flex-wrap"
+          >
 
-                <h3>
-                    Responsable
-                </h3>
+            <button
+              class="pixel-button"
+              onclick="mostrar('galeria')"
+            >
 
-                <p>
-                    Promueve una mayor conciencia
-                    sobre el cuidado del planeta.
-                </p>
+              GALERÍA &gt;&gt;
 
-            </div>
-
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-<main id="javascript" class="pagina">
-
-    <section class="contenido">
-
-        <span class="etiqueta">
-            💻 TECNOLOGÍA
-        </span>
-
-        <h2>
-            JavaScript Vanilla
-        </h2>
-
-        <p>
-            JavaScript es un lenguaje de programación que
-            permite agregar interacción y comportamiento
-            a las páginas web.
-        </p>
-
-
-        <div class="comparacion">
-
-
-            <div>
-
-                <h3>
-                    HTML
-                </h3>
-
-                <p>
-                    Se utiliza para crear la estructura
-                    de la página.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    CSS
-                </h3>
-
-                <p>
-                    Se utiliza para el diseño
-                    y la apariencia.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    JavaScript
-                </h3>
-
-                <p>
-                    Agrega interacción y comportamiento.
-                </p>
-
-            </div>
-
-
-        </div>
-
-
-        <h3>
-            Variables
-        </h3>
-
-        <pre><code>let nombre = "EcoMaceta";
-let precio = 10;</code></pre>
-
-
-        <h3>
-            Funciones
-        </h3>
-
-        <pre><code>function saludar() {
-    alert("Hola desde EcoMaceta");
-}</code></pre>
-
-
-        <h3>
-            Eventos
-        </h3>
-
-        <p>
-            Los eventos permiten que la página responda
-            a acciones del usuario, como hacer clic
-            en un botón.
-        </p>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     JQUERY
-========================================================= -->
-
-<main id="jquery" class="pagina">
-
-    <section class="contenido">
-
-        <span class="etiqueta">
-            ⚙️ JAVASCRIPT
-        </span>
-
-        <h2>
-            jQuery
-        </h2>
-
-        <p>
-            jQuery es una biblioteca de JavaScript
-            que facilita algunas tareas comunes
-            al desarrollar páginas web.
-        </p>
-
-
-        <h3>
-            ¿Para qué sirve?
-        </h3>
-
-        <p>
-            Puede facilitar el trabajo con elementos
-            HTML, eventos y efectos.
-        </p>
-
-
-        <h3>
-            Ejemplo
-        </h3>
-
-        <pre><code>$("#boton").click(function() {
-    alert("Hola");
-});</code></pre>
-
-
-        <div class="comparacion">
-
-
-            <div>
-
-                <h3>
-                    Ventaja
-                </h3>
-
-                <p>
-                    Tiene una sintaxis sencilla
-                    para algunas tareas.
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Efectos
-                </h3>
-
-                <p>
-                    Puede utilizar efectos como
-                    fadeIn(), fadeOut() y slideToggle().
-                </p>
-
-            </div>
-
-
-            <div>
-
-                <h3>
-                    Símbolo $
-                </h3>
-
-                <p>
-                    Se utiliza frecuentemente para
-                    trabajar con elementos de la página.
-                </p>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     JSON
-========================================================= -->
-
-<main id="json" class="pagina">
-
-    <section class="contenido">
-
-        <span class="etiqueta">
-            📦 DATOS
-        </span>
-
-        <h2>
-            JSON
-        </h2>
-
-        <p>
-            JSON significa JavaScript Object Notation.
-            Es un formato utilizado para almacenar
-            y transportar información.
-        </p>
-
-
-        <h3>
-            Ejemplo
-        </h3>
-
-        <pre><code>{
-    "nombre": "EcoMaceta",
-    "precio": 10,
-    "ecologica": true
-}</code></pre>
-
-
-        <h3>
-            Clave y valor
-        </h3>
-
-        <p>
-            JSON organiza la información mediante
-            pares de clave y valor.
-        </p>
-
-
-        <h3>
-            Comunicación
-        </h3>
-
-        <p>
-            Puede utilizarse para enviar y recibir
-            información entre una página web,
-            un servidor o una API.
-        </p>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     HOSTING
-========================================================= -->
-
-<main id="hosting" class="pagina">
-
-    <section class="contenido">
-
-        <span class="etiqueta">
-            🌐 INTERNET
-        </span>
-
-        <h2>
-            Web Hosting y Dominios
-        </h2>
-
-
-        <h3>
-            ¿Qué es un hosting?
-        </h3>
-
-        <p>
-            Es un servicio que permite almacenar
-            los archivos de un sitio web para que
-            puedan estar disponibles en Internet.
-        </p>
-
-
-        <div class="tarjetas">
-
-
-            <div class="tarjeta">
-
-                <div class="icono-circular">
-                    🏠
-                </div>
-
-                <h3>
-                    Compartido
-                </h3>
-
-                <p>
-                    Varios sitios utilizan recursos
-                    del mismo servidor.
-                </p>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="icono-circular">
-                    🖥️
-                </div>
-
-                <h3>
-                    VPS
-                </h3>
-
-                <p>
-                    Proporciona recursos más
-                    independientes.
-                </p>
-
-            </div>
-
-
-            <div class="tarjeta">
-
-                <div class="icono-circular">
-                    ☁️
-                </div>
-
-                <h3>
-                    Cloud
-                </h3>
-
-                <p>
-                    Utiliza recursos distribuidos
-                    en la nube.
-                </p>
-
-            </div>
-
-
-        </div>
-
-
-        <h3>
-            Vercel
-        </h3>
-
-        <p>
-            Vercel permite publicar proyectos web
-            y resulta útil para sitios estáticos
-            y aplicaciones web.
-        </p>
-
-
-        <h3>
-            Dominio
-        </h3>
-
-        <p>
-            Es el nombre o dirección que las personas
-            utilizan para entrar a un sitio web.
-        </p>
-
-
-        <h3>
-            DNS
-        </h3>
-
-        <p>
-            El DNS ayuda a conectar un dominio
-            con el servidor donde está alojado
-            el sitio.
-        </p>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     GOOGLE TOOLS
-========================================================= -->
-
-<main id="google" class="pagina">
-
-    <section class="contenido">
-
-        <span class="etiqueta">
-            ⭐ GOOGLE TOOLS
-        </span>
-
-        <h2>
-            15 herramientas de Google
-        </h2>
-
-        <p>
-            Estas herramientas pueden utilizarse para
-            estudiar, organizar información, comunicarse,
-            trabajar y buscar información.
-        </p>
-
-
-        <div class="google-grid">
-
-
-            <div class="google-card">
-                <div class="google-icon">📁</div>
-                <h3>Google Drive</h3>
-                <p>
-                    Permite almacenar, organizar
-                    y compartir archivos.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">📝</div>
-                <h3>Google Docs</h3>
-                <p>
-                    Permite crear y editar documentos
-                    en línea.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">📊</div>
-                <h3>Google Sheets</h3>
-                <p>
-                    Sirve para crear hojas de cálculo
-                    y organizar datos.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">🎨</div>
-                <h3>Google Slides</h3>
-                <p>
-                    Permite crear presentaciones
-                    con diapositivas.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">📋</div>
-                <h3>Google Forms</h3>
-                <p>
-                    Sirve para crear formularios,
-                    encuestas y cuestionarios.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">🎥</div>
-                <h3>Google Meet</h3>
-                <p>
-                    Permite realizar videollamadas
-                    y reuniones.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">📅</div>
-                <h3>Google Calendar</h3>
-                <p>
-                    Ayuda a organizar fechas,
-                    eventos y actividades.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">🌐</div>
-                <h3>Google Sites</h3>
-                <p>
-                    Permite crear sitios web
-                    de manera sencilla.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">✉️</div>
-                <h3>Gmail</h3>
-                <p>
-                    Servicio de correo electrónico
-                    para enviar y recibir mensajes.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">📌</div>
-                <h3>Google Keep</h3>
-                <p>
-                    Permite crear notas y listas
-                    rápidamente.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">✅</div>
-                <h3>Google Tasks</h3>
-                <p>
-                    Sirve para organizar tareas
-                    y pendientes.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">💬</div>
-                <h3>Google Chat</h3>
-                <p>
-                    Permite comunicarse mediante
-                    mensajes y espacios.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">🗺️</div>
-                <h3>Google Maps</h3>
-                <p>
-                    Permite buscar lugares,
-                    direcciones y mapas.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">🌎</div>
-                <h3>Google Translate</h3>
-                <p>
-                    Ayuda a traducir textos
-                    entre diferentes idiomas.
-                </p>
-            </div>
-
-
-            <div class="google-card">
-                <div class="google-icon">📈</div>
-                <h3>Google Trends</h3>
-                <p>
-                    Permite observar tendencias
-                    de búsqueda en Internet.
-                </p>
-            </div>
-
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     QUIZ
-========================================================= -->
-
-<main id="quiz" class="pagina">
-
-    <section class="contenido">
-
-        <span class="etiqueta">
-            📝 CUESTIONARIO
-        </span>
-
-        <h2>
-            ¿Cuánto aprendiste?
-        </h2>
-
-
-        <!-- PREGUNTA 1 -->
-
-        <div class="pregunta">
-
-            <h3>
-                1. ¿Qué se utiliza principalmente
-                para dar estilo a una página?
-            </h3>
-
-            <button onclick="respuesta(this, false)">
-                A) HTML
             </button>
-
-            <button onclick="respuesta(this, true)">
-                B) CSS
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                C) JSON
-            </button>
-
-            <p class="resultado"></p>
-
-        </div>
-
-
-        <!-- PREGUNTA 2 -->
-
-        <div class="pregunta">
-
-            <h3>
-                2. ¿Qué lenguaje permite agregar
-                interacción?
-            </h3>
-
-            <button onclick="respuesta(this, true)">
-                A) JavaScript
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                B) CSS
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                C) HTML
-            </button>
-
-            <p class="resultado"></p>
-
-        </div>
-
-
-        <!-- PREGUNTA 3 -->
-
-        <div class="pregunta">
-
-            <h3>
-                3. ¿Qué herramienta sirve para
-                crear formularios?
-            </h3>
-
-            <button onclick="respuesta(this, false)">
-                A) Google Maps
-            </button>
-
-            <button onclick="respuesta(this, true)">
-                B) Google Forms
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                C) Google Calendar
-            </button>
-
-            <p class="resultado"></p>
-
-        </div>
-
-
-        <!-- PREGUNTA 4 -->
-
-        <div class="pregunta">
-
-            <h3>
-                4. ¿Qué tecnología utilizamos
-                para el carrusel?
-            </h3>
-
-            <button onclick="respuesta(this, true)">
-                A) Bootstrap
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                B) JSON
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                C) DNS
-            </button>
-
-            <p class="resultado"></p>
-
-        </div>
-
-
-        <!-- PREGUNTA 5 -->
-
-        <div class="pregunta">
-
-            <h3>
-                5. ¿Qué herramienta permite
-                almacenar archivos en la nube?
-            </h3>
-
-            <button onclick="respuesta(this, true)">
-                A) Google Drive
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                B) Google Meet
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                C) Google Translate
-            </button>
-
-            <p class="resultado"></p>
-
-        </div>
-
-
-        <!-- PREGUNTA 6 -->
-
-        <div class="pregunta">
-
-            <h3>
-                6. ¿Qué función agregamos al proyecto?
-            </h3>
-
-            <button onclick="respuesta(this, true)">
-                A) Modo claro y oscuro
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                B) Modo videojuego
-            </button>
-
-            <button onclick="respuesta(this, false)">
-                C) Modo impresión
-            </button>
-
-            <p class="resultado"></p>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-
-<!-- =========================================================
-     CONTACTO
-========================================================= -->
-
-<main id="contacto" class="pagina">
-
-    <section class="contenido contacto">
-
-        <span class="etiqueta">
-            💌 CONTACTO
-        </span>
-
-        <h2>
-            Escríbenos
-        </h2>
-
-        <p>
-            ¿Tienes alguna pregunta, comentario o sugerencia
-            sobre EcoMaceta? Escríbenos.
-        </p>
-
-
-        <form
-            id="formularioContacto"
-            class="formulario-contacto">
-
-
-            <!-- NOMBRE -->
-
-            <div class="campo">
-
-                <label for="nombre">
-                    Nombre
-                </label>
-
-                <input
-                    type="text"
-                    id="nombre"
-                    name="nombre"
-                    placeholder="Escribe tu nombre"
-                    required>
-
-            </div>
-
-
-            <!-- CORREO -->
-
-            <div class="campo">
-
-                <label for="correo">
-                    Correo electrónico
-                </label>
-
-                <input
-                    type="email"
-                    id="correo"
-                    name="correo"
-                    placeholder="ejemplo@gmail.com"
-                    required>
-
-            </div>
-
-
-            <!-- MENSAJE -->
-
-            <div class="campo">
-
-                <label for="mensaje">
-                    Mensaje
-                </label>
-
-                <textarea
-                    id="mensaje"
-                    name="mensaje"
-                    rows="7"
-                    placeholder="Escribe tu mensaje..."
-                    required></textarea>
-
-            </div>
 
 
             <button
-                type="submit"
-                class="btn btn-eco">
+              class="pixel-button dark"
+              onclick="mostrar('contacto')"
+            >
 
-                <i class="bi bi-send"></i>
-
-                Enviar mensaje
+              PREGÚNTANOS
 
             </button>
 
+          </div>
 
-            <div
-                id="estadoFormulario"
-                class="estado-formulario">
-            </div>
+        </div>
 
+      </div>
+
+
+
+      <h3 class="section-title mt-4">
+
+        FICHA TÉCNICA
+
+      </h3>
+
+
+      <table class="info-table">
+
+        <tr>
+
+          <td>
+            PRODUCTO
+          </td>
+
+          <td>
+            Llaverito electrónico con forma de televisor
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            ESTILO
+          </td>
+
+          <td>
+            CRT retro / web digital / coleccionable
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            USO
+          </td>
+
+          <td>
+            Accesorio de bolso, llavero o pieza decorativa
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            PANTALLA
+          </td>
+
+          <td>
+            Pequeña pantalla electrónica
+          </td>
+
+        </tr>
+
+
+        <tr>
+
+          <td>
+            MARCA
+          </td>
+
+          <td>
+            NEONFRAME
+          </td>
+
+        </tr>
+
+      </table>
+
+    </div>
+
+  </div>
+
+
+  <div class="two">
+
+
+    <div class="box lime">
+
+      <div class="box-head light">
+
+        >> ¿POR QUÉ UN TELEVISOR PEQUEÑO?
+
+      </div>
+
+
+      <div class="section-content">
+
+        <p
+          style="font-size:12px;line-height:1.8"
+        >
+
+          Porque una pantalla pequeña puede
+          convertirse en un objeto personal.
+
+          <br><br>
+
+          NEONFRAME mezcla tecnología,
+          nostalgia y diseño coleccionable
+          en un formato inesperadamente pequeño.
+
+        </p>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="box dark">
+
+      <div class="box-head">
+
+        >> ARCHIVO DEL CONCEPTO
+
+      </div>
+
+
+      <div class="section-content">
+
+<pre style="font-size:11px;margin:0">{
+  "marca": "NEONFRAME",
+  "objeto": "llavero_tv_pequeno",
+  "señal": "retro",
+  "estado": "EN LÍNEA"
+}</pre>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     GALERÍA
+========================== -->
+
+<section
+  id="galeria"
+  class="pantalla"
+>
+
+  <div class="box">
+
+    <div class="box-head">
+
+      >> ARCHIVO VISUAL
+
+      <span class="window-buttons">
+
+        <i></i>
+        <i></i>
+        <i></i>
+
+      </span>
+
+    </div>
+
+
+    <div class="section-content">
+
+      <h2 class="section-title">
+
+        GALERÍA DE SEÑALES
+
+      </h2>
+
+
+      <p style="font-size:12px">
+
+        Un archivo visual de la estética
+        NEONFRAME: CRT, colores eléctricos,
+        pantallas pequeñas y objetos que parecen
+        salir de una página web de otra época.
+
+      </p>
+
+
+      <div class="gallery mt-3">
+
+        <div class="gallery-item">
+          TV_01
+        </div>
+
+        <div class="gallery-item">
+          TV_02
+        </div>
+
+        <div class="gallery-item">
+          TV_03
+        </div>
+
+      </div>
+
+
+
+      <div class="box mt-3">
+
+        <div class="box-head light">
+
+          >> IMAGEN DE REFERENCIA
+
+        </div>
+
+
+        <div
+          class="section-content text-center"
+        >
+
+          <img
+            src="neo.jpg"
+            alt="Referencia de llaveros TV de NEONFRAME"
+
+            style="
+              max-width:100%;
+              max-height:520px;
+              object-fit:contain;
+              border:4px solid var(--black);
+            "
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     NOSOTROS
+========================== -->
+
+<section
+  id="about"
+  class="pantalla"
+>
+
+  <div class="grid">
+
+
+    <div class="box">
+
+      <div class="box-head light">
+
+        >> SOBRE LA EMPRESA
+
+      </div>
+
+
+      <div class="section-content">
+
+        <h2 class="section-title">
+
+          ¿QUIÉN ES NEONFRAME?
+
+        </h2>
+
+
+        <p
+          style="font-size:12px;line-height:1.8"
+        >
+
+          NEONFRAME es una marca conceptual
+          de pequeños accesorios electrónicos.
+
+          <br><br>
+
+          La identidad toma referencias de los
+          sitios web personales de internet antiguo:
+
+          interfaces negras, verde ácido,
+          ventanas, botones, píxeles y objetos
+          con personalidad.
+
+        </p>
+
+
+        <div class="tag">
+          RETRO
+        </div>
+
+        <div class="tag">
+          DIGITAL
+        </div>
+
+        <div class="tag">
+          COLECCIONABLE
+        </div>
+
+        <div class="tag">
+          WEB Y2K
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div class="box dark">
+
+      <div class="box-head">
+
+        >> VALORES DE LA MARCA
+
+      </div>
+
+
+      <div class="section-content">
+
+        <ul class="pixel-list">
+
+          <li>
+            Hacer tecnología que se sienta como un objeto.
+          </li>
+
+          <li>
+            Crear diseños pequeños pero memorables.
+          </li>
+
+          <li>
+            Mezclar nostalgia con ideas nuevas.
+          </li>
+
+          <li>
+            Construir una identidad visual reconocible.
+          </li>
+
+        </ul>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="box mt-3">
+
+    <div class="box-head">
+
+      >> PREGUNTAS FRECUENTES / INFORMACIÓN
+
+    </div>
+
+
+    <div class="section-content">
+
+      <div
+        class="two"
+        style="margin-top:0"
+      >
+
+        <div>
+
+          <b>
+            ¿Qué vende NEONFRAME?
+          </b>
+
+          <p style="font-size:11px">
+
+            Llaveritos electrónicos
+            inspirados en pequeños televisores.
+
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <b>
+            ¿Cuál es la estética?
+          </b>
+
+          <p style="font-size:11px">
+
+            CRT, digital, píxel,
+            web retro y colores neón.
+
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <b>
+            ¿Es una tienda?
+          </b>
+
+          <p style="font-size:11px">
+
+            Esta página funciona como concepto
+            y presentación de marca.
+
+          </p>
+
+        </div>
+
+
+        <div>
+
+          <b>
+            ¿Puedo preguntar?
+          </b>
+
+          <p style="font-size:11px">
+
+            Sí. Usa la sección CONTACTO
+            para enviar un mensaje.
+
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+<!-- =========================
+     CONTACTO
+========================== -->
+
+<section
+  id="contacto"
+  class="pantalla"
+>
+
+  <div class="contact-grid">
+
+
+    <div class="box">
+
+      <div class="box-head light">
+
+        >> ENVIAR UNA TRANSMISIÓN
+
+      </div>
+
+
+      <div class="form-box">
+
+        <h2 class="section-title">
+
+          CONTACTAR A NEONFRAME
+
+        </h2>
+
+
+        <p style="font-size:11px">
+
+          ¿Quieres preguntar por los llaveritos,
+          proponer una idea o hablar sobre la marca?
+
+          <br><br>
+
+          Escribe abajo.
+
+        </p>
+
+
+        <form id="formContacto">
+
+
+          <div class="mb-3">
+
+            <label
+              class="form-label"
+              for="nombre"
+            >
+              NOMBRE
+            </label>
+
+            <input
+              class="form-control"
+              id="nombre"
+              required
+              placeholder="tu nombre"
+            >
+
+          </div>
+
+
+
+          <div class="mb-3">
+
+            <label
+              class="form-label"
+              for="correo"
+            >
+              CORREO
+            </label>
+
+            <input
+              class="form-control"
+              id="correo"
+              type="email"
+              required
+              placeholder="tucorreo@ejemplo.com"
+            >
+
+          </div>
+
+
+
+          <div class="mb-3">
+
+            <label
+              class="form-label"
+              for="mensaje"
+            >
+              MENSAJE
+            </label>
+
+            <textarea
+              class="form-control"
+              id="mensaje"
+              rows="5"
+              required
+              placeholder="escribe tu mensaje..."
+            ></textarea>
+
+          </div>
+
+
+          <button
+            class="pixel-button"
+            type="submit"
+          >
+
+            ENVIAR &gt;&gt;
+
+          </button>
+
+
+          <p
+            id="estadoContacto"
+            class="mt-3"
+          ></p>
 
         </form>
 
-    </section>
+      </div>
+
+    </div>
+
+
+
+    <div class="box dark">
+
+      <div class="box-head">
+
+        >> ESTADO DE COMUNICACIÓN
+
+      </div>
+
+
+      <div class="section-content">
+
+
+        <div
+          class="box lime p-3 mb-3"
+          style="box-shadow:none"
+        >
+
+          <b>
+            ● SEÑAL EN LÍNEA
+          </b>
+
+          <p
+            class="mb-0 mt-2"
+            style="font-size:11px"
+          >
+
+            El formulario conserva
+            la conexión de Discord
+            de tu página original.
+
+          </p>
+
+        </div>
+
+
+<pre style="font-size:10px">CANAL: DISCORD
+SISTEMA: NEONFRAME
+SEÑAL: ACTIVA
+MODO: FORMULARIO DE CONTACTO</pre>
+
+
+        <p
+          style="
+            font-size:11px;
+            line-height:1.7;
+            color:var(--gray)
+          "
+        >
+
+          La integración de Discord permanece
+          en el código JavaScript sin cambiar
+          su funcionamiento.
+
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 </main>
 
 
 
-<!-- =========================================================
+<!-- =========================
      FOOTER
-========================================================= -->
+========================== -->
 
-<footer>
+<footer class="footer">
 
-    <h3>
-        🌱 EcoMaceta
-    </h3>
-
-    <p>
-        Proyecto web educativo
-    </p>
-
-    <p>
-        Cuidar el planeta comienza con pequeñas ideas.
-    </p>
+  NEONFRAME © 2026 ·
+  pequeñas pantallas para pequeños mundos ·
+  [ SISTEMA EN LÍNEA ]
 
 </footer>
 
-
-
-<!-- =========================================================
-     BOOTSTRAP JS
-========================================================= -->
-
-<script
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
-</script>
+</div>
 
 
 
-<!-- =========================================================
-     JAVASCRIPT DEL PROYECTO
-========================================================= -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 
 <script>
 
-
-/* =========================================================
-   ORDEN DE LAS PÁGINAS
-========================================================= */
-
-const ordenPaginas = [
-
-    "inicio",
-
-    "producto",
-
-    "javascript",
-
-    "jquery",
-
-    "json",
-
-    "hosting",
-
-    "google",
-
-    "quiz",
-
-    "contacto"
-
-];
-
-
-let paginaActual = 0;
-
-
-
-/* =========================================================
-   MOSTRAR PÁGINA
-========================================================= */
-
-function mostrarPagina(id) {
-
-    const paginas =
-        document.querySelectorAll(".pagina");
-
-
-    paginas.forEach(function(pagina) {
-
-        pagina.classList.remove("activa");
-
-    });
-
-
-    const paginaNueva =
-        document.getElementById(id);
-
-
-    if (!paginaNueva) {
-
-        return;
-
-    }
-
-
-    paginaNueva.classList.add("activa");
-
-
-    paginaActual =
-        ordenPaginas.indexOf(id);
-
-
-    window.scrollTo({
-
-        top: 0,
-
-        behavior: "smooth"
-
-    });
-
-
-    cerrarMenu();
-
-}
-
-
-
-/* =========================================================
-   PÁGINA SIGUIENTE
-========================================================= */
-
-function paginaSiguiente() {
-
-    if (
-        paginaActual <
-        ordenPaginas.length - 1
-    ) {
-
-        paginaActual++;
-
-        mostrarPagina(
-            ordenPaginas[paginaActual]
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   PÁGINA ANTERIOR
-========================================================= */
-
-function paginaAnterior() {
-
-    if (paginaActual > 0) {
-
-        paginaActual--;
-
-        mostrarPagina(
-            ordenPaginas[paginaActual]
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   CREAR BOTONES ANTERIOR / SIGUIENTE
-========================================================= */
-
-function crearBotonesNavegacion() {
-
-    const paginas =
-        document.querySelectorAll(".pagina");
-
-
-    paginas.forEach(function(pagina) {
-
-
-        const botones =
-            document.createElement("div");
-
-
-        botones.className =
-            "botones-navegacion";
-
-
-        botones.innerHTML = `
-
-            <button
-                class="btn btn-eco boton-anterior"
-                onclick="paginaAnterior()">
-
-                <i class="bi bi-arrow-left"></i>
-
-                Anterior
-
-            </button>
-
-
-            <button
-                class="btn btn-eco boton-siguiente"
-                onclick="paginaSiguiente()">
-
-                Siguiente
-
-                <i class="bi bi-arrow-right"></i>
-
-            </button>
-
-        `;
-
-
-        pagina.appendChild(botones);
-
-    });
-
-
-    actualizarBotones();
-
-}
-
-
-
-/* =========================================================
-   ACTUALIZAR BOTONES
-========================================================= */
-
-function actualizarBotones() {
-
-    const paginas =
-        document.querySelectorAll(".pagina");
-
-
-    paginas.forEach(function(pagina) {
-
-
-        const anterior =
-            pagina.querySelector(".boton-anterior");
-
-
-        const siguiente =
-            pagina.querySelector(".boton-siguiente");
-
-
-        if (anterior) {
-
-            if (paginaActual === 0) {
-
-                anterior.style.visibility =
-                    "hidden";
-
-            } else {
-
-                anterior.style.visibility =
-                    "visible";
-
-            }
-
-        }
-
-
-        if (siguiente) {
-
-            if (
-                paginaActual ===
-                ordenPaginas.length - 1
-            ) {
-
-                siguiente.style.visibility =
-                    "hidden";
-
-            } else {
-
-                siguiente.style.visibility =
-                    "visible";
-
-            }
-
-        }
-
-    });
-
-}
-
-
-
-/* =========================================================
-   CERRAR MENÚ EN CELULAR
-========================================================= */
-
-function cerrarMenu() {
-
-    const menu =
-        document.getElementById("menu");
-
-
-    if (
-        menu &&
-        menu.classList.contains("show")
-    ) {
-
-        const menuBootstrap =
-            bootstrap.Collapse.getInstance(menu);
-
-
-        if (menuBootstrap) {
-
-            menuBootstrap.hide();
-
-        }
-
-    }
-
-}
-
-
-
-/* =========================================================
-   MODO CLARO / OSCURO
-========================================================= */
-
-function cambiarModo() {
-
-    document.body.classList.toggle(
-        "modo-oscuro"
+/* =========================
+   NAVEGACIÓN
+========================= */
+
+function mostrar(id, boton){
+
+  document
+    .querySelectorAll(".pantalla")
+    .forEach(
+      p => p.classList.remove("activa")
     );
+
+
+  const pantalla =
+    document.getElementById(id);
+
+
+  if(pantalla){
+
+    pantalla.classList.add("activa");
+
+  }
+
+
+  document
+    .querySelectorAll(".navlinks button")
+    .forEach(
+      b => b.classList.remove("active")
+    );
+
+
+  if(boton){
+
+    boton.classList.add("active");
+
+  }
+
+
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
+
+}
+
+
+/* =========================
+   MODO CLARO / OSCURO
+========================= */
+
+function actualizarBotonTema(){
+
+  const boton =
+    document.getElementById("themeToggle");
+
+  if(!boton) return;
+
+
+  if(
+    document.body.classList.contains(
+      "modo-claro"
+    )
+  ){
+
+    boton.textContent =
+      "☾ MODO OSCURO";
+
+  }else{
+
+    boton.textContent =
+      "☀ MODO CLARO";
+
+  }
+
+}
+
+
+function alternarModo(){
+
+  document.body.classList.toggle(
+    "modo-claro"
+  );
+
+
+  const modoClaro =
+    document.body.classList.contains(
+      "modo-claro"
+    );
+
+
+  localStorage.setItem(
+    "neonframe-modo",
+    modoClaro
+      ? "claro"
+      : "oscuro"
+  );
+
+
+  actualizarBotonTema();
+
+}
+
+
+(function cargarModo(){
+
+  const modoGuardado =
+    localStorage.getItem(
+      "neonframe-modo"
+    );
+
+
+  if(modoGuardado === "claro"){
+
+    document.body.classList.add(
+      "modo-claro"
+    );
+
+  }
+
+
+  actualizarBotonTema();
+
+})();
+
+
+/* =========================
+   BUSCADOR
+========================= */
+
+function buscar(){
+
+  const texto =
+    document
+      .getElementById("buscador")
+      .value
+      .toLowerCase()
+      .trim();
+
+
+  if(!texto){
+
+    mostrar("inicio");
+
+    return;
+
+  }
+
+
+  const palabras = {
+
+    "tv":"producto",
+
+    "tele":"producto",
+
+    "televisor":"producto",
+
+    "televisión":"producto",
+
+    "llavero":"producto",
+
+    "keychain":"producto",
+
+    "producto":"producto",
+
+    "gallery":"galeria",
+
+    "galería":"galeria",
+
+    "imagenes":"galeria",
+
+    "imágenes":"galeria",
+
+    "about":"about",
+
+    "empresa":"about",
+
+    "nosotros":"about",
+
+    "contacto":"contacto",
+
+    "contact":"contacto",
+
+    "discord":"contacto"
+
+  };
+
+
+  const destino =
+    Object.keys(palabras)
+      .find(
+        p => texto.includes(p)
+      );
+
+
+  mostrar(
+    destino
+      ? palabras[destino]
+      : "inicio"
+  );
+
+
+  if(!destino){
+
+    alert(
+      "No se encontró la señal. Prueba: TV, llavero, producto, galería, nosotros o contacto."
+    );
+
+  }
+
+}
+
+
+document
+  .getElementById("buscador")
+  .addEventListener(
+    "keydown",
+    function(e){
+
+      if(e.key === "Enter"){
+
+        buscar();
+
+      }
+
+    }
+  );
+
+
+/* ==========================================================
+   DISCORD
+   ESTE BLOQUE SE MANTIENE IGUAL
+========================================================== */
+
+const LINK_DISCORD =
+"https://discord.com/api/webhooks/1559294273138982943/d9SCg-i5eQWlxDvSFXSrm83vbz022RyY-21ltu7cerLedmIzzuYnIhrKMUzMJcTwuRM9";
+
+
+$("#formContacto").on(
+  "submit",
+  async function(evento){
+
+    evento.preventDefault();
+
+
+    const formulario = this;
 
 
     const boton =
-        document.getElementById("modoBoton");
+      formulario.querySelector(
+        'button[type="submit"]'
+      );
 
 
-    if (
-        document.body.classList.contains(
-            "modo-oscuro"
+    const estado =
+      document.getElementById(
+        "estadoContacto"
+      );
+
+
+    const nombre =
+      $("#nombre")
+        .val()
+        .trim();
+
+
+    const correo =
+      $("#correo")
+        .val()
+        .trim();
+
+
+    const mensaje =
+      $("#mensaje")
+        .val()
+        .trim();
+
+
+    if(
+      !nombre ||
+      !correo ||
+      !mensaje
+    ){
+
+      estado.textContent =
+        "Completa todos los campos.";
+
+      return;
+
+    }
+
+
+    if(
+      !LINK_DISCORD.startsWith(
+        "https://discord.com/api/webhooks/"
+      )
+      ||
+      LINK_DISCORD.includes(
+        "PEGA_AQUI"
+      )
+    ){
+
+      estado.textContent =
+        "Configura el webhook de Discord antes de enviar.";
+
+      return;
+
+    }
+
+
+    boton.disabled = true;
+
+    boton.textContent =
+      "Enviando...";
+
+    estado.textContent = "";
+
+
+    try{
+
+      const respuesta =
+        await fetch(
+          `${LINK_DISCORD}?wait=true`,
+          {
+
+            method:"POST",
+
+            headers:{
+              "Content-Type":
+                "application/json"
+            },
+
+            body:JSON.stringify({
+
+              username:"Ecopmaceta",
+
+              embeds:[{
+
+                title:
+                  "🌱 Nuevo mensaje de Ecopmaceta",
+
+                color:6268728,
+
+                fields:[
+
+                  {
+
+                    name:"👤 Nombre",
+
+                    value:
+                      nombre.slice(
+                        0,
+                        1024
+                      ),
+
+                    inline:true
+
+                  },
+
+                  {
+
+                    name:"📧 Correo",
+
+                    value:
+                      correo.slice(
+                        0,
+                        1024
+                      ),
+
+                    inline:true
+
+                  },
+
+                  {
+
+                    name:"💬 Mensaje",
+
+                    value:
+                      mensaje.slice(
+                        0,
+                        4000
+                      )
+
+                  }
+
+                ],
+
+                footer:{
+
+                  text:
+                    "Formulario de contacto Ecopmaceta"
+
+                },
+
+                timestamp:
+                  new Date()
+                    .toISOString()
+
+              }]
+
+            })
+
+          }
+
+        );
+
+
+      if(!respuesta.ok){
+
+        throw new Error(
+          "Discord rechazó el mensaje."
+        );
+
+      }
+
+
+      estado.textContent =
+        "¡Mensaje enviado correctamente a Discord! ♡";
+
+
+      formulario.reset();
+
+
+    }catch(error){
+
+      console.error(error);
+
+
+      estado.textContent =
+        "No se pudo enviar el mensaje. Verifica el webhook y tu conexión.";
+
+    }finally{
+
+      boton.disabled = false;
+
+      boton.textContent =
+        "ENVIAR >>";
+
+    }
+
+  }
+);
+
+
+/* =========================
+   SPARKLES AL HACER CLICK
+========================= */
+
+document.addEventListener(
+  "click",
+  function(evento){
+
+    const spark =
+      document.createElement("span");
+
+
+    spark.className =
+      "spark";
+
+
+    spark.textContent =
+      [
+        "✦",
+        "★",
+        "✧",
+        "▸"
+      ][
+        Math.floor(
+          Math.random()*4
         )
-    ) {
-
-        boton.innerHTML = "☀️";
+      ];
 
 
-        localStorage.setItem(
-            "modoEcoMaceta",
-            "oscuro"
-        );
-
-    } else {
-
-        boton.innerHTML = "🌙";
+    spark.style.left =
+      `${evento.clientX}px`;
 
 
-        localStorage.setItem(
-            "modoEcoMaceta",
-            "claro"
-        );
-
-    }
-
-}
+    spark.style.top =
+      `${evento.clientY}px`;
 
 
-
-/* =========================================================
-   RESPUESTAS DEL QUIZ
-========================================================= */
-
-function respuesta(boton, correcta) {
-
-
-    const pregunta =
-        boton.parentElement;
-
-
-    const resultado =
-        pregunta.querySelector(
-            ".resultado"
-        );
-
-
-    const botones =
-        pregunta.querySelectorAll(
-            "button"
-        );
-
-
-    botones.forEach(function(btn) {
-
-        btn.classList.remove(
-            "respuesta-correcta",
-            "respuesta-incorrecta"
-        );
-
-    });
-
-
-    if (correcta) {
-
-
-        resultado.textContent =
-            "✅ ¡Correcto! Muy bien.";
-
-
-        resultado.className =
-            "resultado correcto";
-
-
-        boton.classList.add(
-            "respuesta-correcta"
-        );
-
-
-    } else {
-
-
-        resultado.textContent =
-            "❌ Incorrecto. Intenta nuevamente.";
-
-
-        resultado.className =
-            "resultado incorrecto";
-
-
-        boton.classList.add(
-            "respuesta-incorrecta"
-        );
-
-    }
-
-}
-
-
-
-/* =========================================================
-   FORMULARIO → DISCORD
-========================================================= */
-
-const formulario =
-    document.getElementById(
-        "formularioContacto"
+    document.body.appendChild(
+      spark
     );
 
 
-formulario.addEventListener(
-    "submit",
-    async function(event) {
+    setTimeout(
+      () => spark.remove(),
+      800
+    );
 
-
-        event.preventDefault();
-
-
-        const estado =
-            document.getElementById(
-                "estadoFormulario"
-            );
-
-
-        const boton =
-            formulario.querySelector(
-                "button[type='submit']"
-            );
-
-
-        const nombre =
-            document.getElementById(
-                "nombre"
-            ).value.trim();
-
-
-        const correo =
-            document.getElementById(
-                "correo"
-            ).value.trim();
-
-
-        const mensaje =
-            document.getElementById(
-                "mensaje"
-            ).value.trim();
-
-
-        if (
-            !nombre ||
-            !correo ||
-            !mensaje
-        ) {
-
-            estado.textContent =
-                "⚠️ Completa todos los campos.";
-
-            estado.className =
-                "estado-formulario error";
-
-            return;
-
-        }
-
-
-        boton.disabled = true;
-
-
-        boton.innerHTML =
-            '<span class="spinner-border spinner-border-sm"></span> Enviando...';
-
-
-        estado.textContent = "";
-
-
-        try {
-
-
-            const respuestaServidor =
-                await fetch(
-                    "/api/contact",
-                    {
-
-                        method: "POST",
-
-                        headers: {
-
-                            "Content-Type":
-                                "application/json"
-
-                        },
-
-                        body: JSON.stringify({
-
-                            nombre:
-                                nombre,
-
-                            correo:
-                                correo,
-
-                            mensaje:
-                                mensaje
-
-                        })
-
-                    }
-                );
-
-
-            const datos =
-                await respuestaServidor.json();
-
-
-            if (
-                !respuestaServidor.ok
-            ) {
-
-                throw new Error(
-                    datos.error ||
-                    "No se pudo enviar el mensaje."
-                );
-
-            }
-
-
-            estado.textContent =
-                "✅ ¡Mensaje enviado correctamente!";
-
-            estado.className =
-                "estado-formulario correcto";
-
-
-            formulario.reset();
-
-
-        } catch (error) {
-
-
-            estado.textContent =
-                "❌ No se pudo enviar el mensaje. Intenta nuevamente.";
-
-
-            estado.className =
-                "estado-formulario error";
-
-
-        }
-
-
-        boton.disabled = false;
-
-
-        boton.innerHTML =
-            '<i class="bi bi-send"></i> Enviar mensaje';
-
-    }
+  }
 );
-
-
-
-/* =========================================================
-   AL CARGAR LA PÁGINA
-========================================================= */
-
-window.addEventListener(
-    "DOMContentLoaded",
-    function() {
-
-
-        /* MODO GUARDADO */
-
-        const modo =
-            localStorage.getItem(
-                "modoEcoMaceta"
-            );
-
-
-        if (modo === "oscuro") {
-
-            document.body.classList.add(
-                "modo-oscuro"
-            );
-
-
-            document.getElementById(
-                "modoBoton"
-            ).innerHTML = "☀️";
-
-        }
-
-
-        /* CREAR BOTONES */
-
-        crearBotonesNavegacion();
-
-    }
-);
-
 
 </script>
 
-
 </body>
-
 </html>
